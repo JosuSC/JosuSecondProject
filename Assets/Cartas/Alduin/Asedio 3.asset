@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4117cd5955dc824e831fd18477f1b72, type: 3}
+  m_Name: Asedio 3
+  m_EditorClassIdentifier: 
+  name: Ejecito
+  imagen: {fileID: 5328477770911536875, guid: c75fe80016dbe3c4fb7ccd0272476d62, type: 3}
+  power: 12
+  type: Asedio
+  IsCreated: 1
+  EffectType: 6
+  faction: Alduin
+  Range:
+  - s
