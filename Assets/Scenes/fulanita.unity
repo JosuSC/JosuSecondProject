@@ -2681,8 +2681,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 51480a7a38608de41a1da8c394cba42b, type: 2}
   - {fileID: 11400000, guid: 97e41434046f755488456e3925750a98, type: 2}
   - {fileID: 11400000, guid: 11e2debc364e1e6489301f3ce283eb8f, type: 2}
-  LiderDovakin: {fileID: 11400000, guid: 3b2cd02f4edeb2441a094445df66d1d0, type: 2}
-  LiderAlduin: {fileID: 11400000, guid: d0b2e6eb8911bc443a9f671e2a0d9912, type: 2}
+  LiderDovakin: {fileID: 11400000, guid: d0b2e6eb8911bc443a9f671e2a0d9912, type: 2}
+  LiderAlduin: {fileID: 11400000, guid: 3b2cd02f4edeb2441a094445df66d1d0, type: 2}
   CurrentPlayer: 0
 --- !u!114 &1386546459
 MonoBehaviour:

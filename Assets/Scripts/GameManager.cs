@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Microsoft.Unity.VisualStudio.Editor;
+using Skyrim_Interpreter;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -38,14 +40,16 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         // agregar cartas a los deck de los jugadores
-        //if(CodeGenerator._cards.Count != 0)
-        //{
-        //    for( int x = 0 ; x < CodeGenerator._cards.Count ; x+=2 )
-        //    {
-        //        CardsPlayer1.Add(CodeGenerator._cards[x]);
-        //        CardsPlayer1.Add(CodeGenerator._cards[x+1]);
-        //    }
-        //}
+        if (GameContext.Cards.Count != 0) 
+        {
+            foreach (var item in GameContext.Cards) 
+            {
+                Card addcard = item.Value;
+                if (addcard.faction == "Alduin") CardsPlayer1.Add(addcard);
+                else if (addcard.faction == "Dovakin") CardsPlayer2.Add(addcard);
+                else { throw new Exception($"La carta {item.Key} no pertene a ninguna faccion del juego"); }
+            }
+        }
         PrepareGame(CardsPlayer1,Deck1);
         PrepareGame(CardsPlayer2,Deck2);
         Debug.Log("Se preparo el juego");

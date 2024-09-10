@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Xml.Linq;
-
+using UnityEngine;
 namespace Skyrim_Interpreter
 {
     internal class Parser
@@ -280,7 +280,7 @@ namespace Skyrim_Interpreter
             else { Console.WriteLine("La carta es tiene OnActivation"); }
             if (!CheckValue("}")){ Console.WriteLine($"Falta un delimitador de cerrada y tenemos es su lugar tenemos {Peek().Value}"); return null; }
             Advance();
-            card.Evaluar();
+           card.Evaluar();
             return card;
         }
         private CardASTNode OnActivationList(CardASTNode card) 
@@ -378,6 +378,7 @@ namespace Skyrim_Interpreter
                     effcard.Selector = SelectorForCard();
                 }
             }
+            Advance();
             //metemos en el efecto de su nombre el selector para obtener la funte y su predicado
             return effcard;
         }
