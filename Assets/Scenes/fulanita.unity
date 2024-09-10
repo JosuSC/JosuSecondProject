@@ -2622,6 +2622,18 @@ MonoBehaviour:
   Hand2: {fileID: 839797544}
   Deck1: {fileID: 1538063572}
   Deck2: {fileID: 1679872087}
+  A1: {fileID: 565896677}
+  A2: {fileID: 1495464947}
+  D1: {fileID: 1308078069}
+  D2: {fileID: 1308594323}
+  G1: {fileID: 2092811257}
+  G2: {fileID: 1949504092}
+  Clima21: {fileID: 202988638}
+  Clima22: {fileID: 830545566}
+  Clima23: {fileID: 105005421}
+  Clima11: {fileID: 1920342266}
+  Clima12: {fileID: 1522539618}
+  Clima13: {fileID: 830549162}
   Cementery1: {fileID: 2055496273}
   Cementery2: {fileID: 2083163733}
   lidersqr1: {fileID: 1823494406}

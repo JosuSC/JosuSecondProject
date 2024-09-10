@@ -3,6 +3,7 @@ using Skyrim_Interpreter;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using static UnityEditor.Timeline.TimelinePlaybackControls;
 
@@ -49,6 +50,10 @@ public class Card : ScriptableObject
         else if (EffectType == CardEffects.plata)
         {
             Effects.Plata(DroppedCard.transform);
+        }
+        else if (EffectType == CardEffects.No_Effect) 
+        {
+             //OnPlay.Play();
         }
     }
     private void OnMouseExit()

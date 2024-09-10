@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Asedio 4
   m_EditorClassIdentifier: 
   name: Ejecito
-  imagen: {fileID: -8039044104615360970, guid: 3b572c31874f478489b63b8ad02b375e, type: 3}
+  imagen: {fileID: 3925350897702361491, guid: 4bae86c1987a1ea4fa47ed35c279357f, type: 3}
   power: 12
   type: Asedio
   IsCreated: 1

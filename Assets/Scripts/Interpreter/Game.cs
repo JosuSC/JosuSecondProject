@@ -13,7 +13,7 @@ namespace Skyrim_Interpreter
         {
             players = new Player[2];
         }
-        public  static Player PlayerID(Guid id) 
+        public  static Player PlayerID(bool id) 
         {
             for (int i = 0; i < players.Length; i++)
             {
@@ -24,4 +24,9 @@ namespace Skyrim_Interpreter
         }
 
     }
+    public class Player 
+    {
+      public  bool ID { get; set; }
+    }
+
 }

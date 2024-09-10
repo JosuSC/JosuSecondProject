@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Distance
   m_EditorClassIdentifier: 
   name: Dragon
-  imagen: {fileID: 0}
+  imagen: {fileID: 3611849395375057378, guid: 7964aabdae1998f4da694fdd0f903b1d, type: 3}
   power: 12
   type: Distancia
   IsCreated: 1

@@ -10,42 +10,93 @@ namespace Skyrim_Interpreter
 {
     public class Context
     {
-        public Guid TriggerPlayer { get; set; }
+        public List<Card> Board { get; set; }
+        public bool TriggerPlayer { get; set; }
         private static Context _current;
-       
+        public List<Card> Hand1 { get; set; }
+        public List<Card> Hand2 { get; set; }
+        public List<Card> Deck1 { get; set; }
+        public List<Card> Deck2 { get; set; }
+        public List<Card> A1 { get; set; }
+        public List<Card> A2 { get; set; }
+        public List<Card> D1 { get; set; }
+        public List<Card> D2 { get; set; }
+        public List<Card> G1 { get; set; }
+        public List<Card> G2 { get; set; }
+        public List<Card> F1 { get; set; }
+        public List<Card> F2 { get; set; }
+        public List<Card> Graveyard1 { get; set; }
+        public List<Card> Graveyard2 { get; set; }
     public static Context Current
     {
         get { return _current; }
         set { _current = value; }
     }
-        public List<Card> Board { get; set; }
-        public Context(Guid id, List<Card> board)
+       
+        public Context(bool id, List<Card> board,List<Card> H1,List<Card>H2,List<Card> A1,List<Card>A2,List<Card>D1,List<Card>D2,List<Card>G1,List<Card>G2,List<Card> f1,List<Card> f2,List<Card>Grave1,List<Card>Grave2)
         {
             this.TriggerPlayer = id;
             this.Board = board;
+            this.Hand1 = H1; this.Hand2 = H2;
+            this.A1= A1; this.A2 = A2;
+            this.D1= D1; this.D2 = D2;
+            this.F1= f1; this.F2 = f2;  
+            this.G1= G1; this.G2 = G2;
+            this.Graveyard1 = Grave1; this.Graveyard2 = Grave2;        
         }   
-        public Hand HandOfPlayer(Guid id) 
+        public Hand HandOfPlayer(bool id) 
         {
-            Player player = PlayerID(id);
-            return player.hand;
+            Hand hand = new Hand();
+            if (!id)
+            {
+                hand.cards = this.Hand1;  
+            }
+            else 
+            {
+                hand.cards = this.Hand2;
+            }
+            return hand;
+        }
+        public Deck DeckOfPlayer(bool id) 
+        {
+          Deck  deck = new Deck();
+            if (!id)
+            {
+                deck.cards = this.Deck1;
+            }
+            else 
+            {
+                deck.cards = this.Deck2;
+            }
+            return deck;
         }
 
-        public Deck DeckOfPlayer(Guid id) 
+        public Graveyard GraveyardOfPlayer(bool id) 
         {
-            Player player = PlayerID(id);
-            return player.deck;
+            Graveyard graveyard = new Graveyard();
+            if (!id)
+            {
+                graveyard.cards = this.Graveyard1;  
+            }
+            else 
+            {
+                graveyard.cards = this.Graveyard2;
+            }
+            return graveyard;   
         }
 
-        public Graveyard GraveyardOfPlayer(Guid id) 
-        {
-            Player player = PlayerID(id);
-            return player.graveyard;
-        }
-
-         public Field FieldOfPlayer(Guid id) 
+         public Field FieldOfPlayer(bool id) 
          {
-            Player player = PlayerID(id);
-            return player.field;
+          Field field = new Field();
+            if (!id)
+            {
+                field.cards = this.F1;
+            }
+            else 
+            {
+                field.cards = this.F2;  
+            }
+            return field;   
          } 
          
         public Deck Deck
@@ -63,10 +114,6 @@ namespace Skyrim_Interpreter
         public Graveyard Graveyard
         {
             get { return GraveyardOfPlayer(TriggerPlayer); }
-        }
-        public Player PlayerID(Guid id)
-        {
-          return Game.PlayerID(id);
         }
     }
     public class Targets 
@@ -91,23 +138,7 @@ namespace Skyrim_Interpreter
             Parameters = new List<string>();
         }
     }
-    public class Player
-    {
-        public Guid ID { get; set; }
-        public Deck deck { get; set; }
-        public Hand hand { get; set; }
-        public Graveyard graveyard { get; set; }
-        public Field field { get; set; }
-
-        public Player(Guid id)
-        {
-            this.ID = id;
-            deck = new Deck();
-            hand = new Hand();
-            graveyard = new Graveyard();
-            field = new Field();
-        }
-    }
+ 
     public interface ICard
     {
         public List<Card> Find(Predicate<Card> predicate);

@@ -133,15 +133,14 @@ namespace Skyrim_Interpreter
         {
             foreach (var node in range) 
             {
-                Console.WriteLine(node);
-                Console.WriteLine("Melee");
-                if (node != "Melee" && node != "Ranged" && node != "Siege") { return false; }
+                Console.WriteLine(node);         
+                if (node != "m" && node != "r" && node != "s") { return false; }
             }
             return true;
         }
         public static bool CheckSource(string source) 
         {
-            List<string> list =new List<string> {"board", "hand", "otherHand", "deck", "othreDeck","field","otherField","parent" };
+            List<string> list =new List<string> {"Hand1","Hand2","Deck1","Deck2","A1","A2","D1","D2","G1","G2","Graveyard1","Graveyard2","Clima21", "Clima22", "Clima23", "Clima11", "Clima12", "Clima13" };
             foreach (var item in list) 
             {
                 if(source == item) return true; 

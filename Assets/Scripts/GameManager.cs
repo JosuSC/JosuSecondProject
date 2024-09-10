@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     public GameObject Hand2;
     public GameObject Deck1;
     public GameObject Deck2;
+    public GameObject A1, A2,D1,D2,G1,G2;
+    public GameObject Clima21, Clima22, Clima23, Clima11, Clima12, Clima13;
     public GameObject Cementery1;
     public GameObject Cementery2;
     //public GameObject Deck1Back;
@@ -61,6 +63,12 @@ public class GameManager : MonoBehaviour
         StarGame(CurrentPlayer);
         CurrentPlayer = false;
     }
+
+    public void EffectsForCards() 
+    {
+        
+    }
+
     public void InstanciarLideres()
     {
         GameObject game = GameObject.Instantiate(Prefab, lidersqr1.transform);
