@@ -26,6 +26,7 @@ public class Card : ScriptableObject
     public string faction;
     public string[] Range;
     public List<ASTnode> OnActivation;
+    public bool Owner;
     public Card()
     {
         this.OnActivation = new List<ASTnode>();
@@ -53,7 +54,7 @@ public class Card : ScriptableObject
         }
         else if (EffectType == CardEffects.No_Effect) 
         {
-            GameManager game = new GameManager();
+            GameManager game = GameManager.Instancia;
             game.EffectsForCards(this);
         }
     }
@@ -62,9 +63,9 @@ public class Card : ScriptableObject
         Gigant.transform.localScale = Vector3.zero; 
     }
      void Start()
-    {
+     {
         Gigant = GameObject.Find("Mega Carta");
         Megacarta = Gigant.GetComponent<SpriteRenderer>();
         Gigant.transform.localScale = Vector3.zero;
-    }
+     }
 }

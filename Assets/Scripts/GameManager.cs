@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Microsoft.Unity.VisualStudio.Editor;
+using NUnit.Framework;
 using Skyrim_Interpreter;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -65,73 +66,75 @@ public class GameManager : MonoBehaviour
     //metodo para obtener las cartas hijas de los objects del juego
     public List<Card> PasarHijos(GameObject father) 
     {
+         //Debug.Log (father.transform.childCount);
+        Debug.Log("no entro en no hijos");
         VisualCard[] cards = father.transform.GetComponentsInChildren<VisualCard>();
+        Debug.Log("Paso por hijos");
         List<Card> output = new List<Card>();   
-        foreach (var card in cards) 
+        for (int i = 0;i < cards.Length;i++) 
         {
-            output.Add(card.card);
+            output.Add(cards[i].card);
         }
         return output;
     }
-
     public void EffectsForCards(Card card) 
     {
         //actualizamos el contexts
-        List<Card> A1 = PasarHijos(this.A1);
-        List<Card> A2 = PasarHijos(this.A2);
-        List<Card> D1 = PasarHijos(this.D1);
-        List<Card> D2 = PasarHijos(this.D2);
-        List<Card> G1 = PasarHijos(this.G1);
-        List<Card> G2 = PasarHijos(this.G2);
-        List<Card> Clima21 = PasarHijos(this.Clima21);
-        List<Card> Clima22 = PasarHijos(this.Clima22);
-        List<Card> Clima23 = PasarHijos(this.Clima23);
-        List<Card> Clima11 = PasarHijos(this.Clima11);
-        List<Card> Clima12 = PasarHijos(this.Clima12);
-        List<Card> Clima13 = PasarHijos(this.Clima13);
-        List<Card> Graveyard1 = PasarHijos(this.Cementery1);
-        List<Card> Graveyard2 = PasarHijos(this.Cementery2);
-        List<Card> Deck1 = PasarHijos(this.Deck1);
-        List<Card> Deck2 = PasarHijos(this.Deck2);
-        List<Card> Field1 = new List<Card>();
-        List<Card> Field2 = new List<Card>();
-        List<Card> Board = new List<Card>();
-        foreach (var item in A1)
+        List<Card> A1list = PasarHijos(A1);
+        List<Card> A2list = PasarHijos(A2);
+        List<Card> D1list = PasarHijos(D1);
+        List<Card> D2list = PasarHijos(D2);
+        List<Card> G1list = PasarHijos(G1);
+        List<Card> G2list = PasarHijos(G2);
+        List<Card> Clima21list = PasarHijos(Clima21);
+        List<Card> Clima22list = PasarHijos(Clima22);
+        List<Card> Clima23list = PasarHijos(Clima23);
+        List<Card> Clima11list = PasarHijos(Clima11);
+        List<Card> Clima12list = PasarHijos(Clima12);
+        List<Card> Clima13list = PasarHijos(Clima13);
+        List<Card> Graveyard1list = PasarHijos(Cementery1);
+        List<Card> Graveyard2list = PasarHijos(Cementery2);
+        List<Card> Deck1list = PasarHijos(Deck1);
+        List<Card> Deck2list = PasarHijos(Deck2);
+        List<Card> Field1list = new List<Card>();
+        List<Card> Field2list = new List<Card>();
+        List<Card> Boardlist = new List<Card>();
+        foreach (var item in A1list)
         {
-            Field1.Add(item);
+            Field1list.Add(item);
         }
-        foreach (var item in D1)
+        foreach (var item in D1list)
         {
-            Field1.Add(item);
+            Field1list.Add(item);
         }
-        foreach (var item in G1)
+        foreach (var item in G1list)
         {
-            Field1.Add(item);
+            Field1list.Add(item);
         }
-        foreach (var item in A2)
+        foreach (var item in A2list)
         {
-            Field2.Add(item);
+            Field2list.Add(item);
         }
-        foreach (var item in D2)
+        foreach (var item in D2list)
         {
-            Field2.Add(item);
+            Field2list.Add(item);
         }
-        foreach (var item in G2)
+        foreach (var item in G2list)
         {
-            Field2.Add(item);
+            Field2list.Add(item);
         }
-        foreach (var item in Field1)
+        foreach (var item in Field1list)
         {
-            Board.Add(item);
+            Boardlist.Add(item);
         }
-        foreach (var item in Field2)
+        foreach (var item in Field2list)
         {
-            Board.Add(item);
+            Boardlist.Add(item);
         }
-        Context newcontext = new Context(CurrentPlayer,Board,this.CardsPlayer1,this.CardsPlayer2,A1,A2,D1,D2,G1,G2,Field1,Field2,Graveyard1,Graveyard2);
+        Context newcontext = new Context(CurrentPlayer,Boardlist,this.CardsPlayer1,this.CardsPlayer2, A1list, A2list, D1list, D2list, G1list, G2list, Field1list, Field2list, Graveyard1list, Graveyard2list);
+        GameContext.MiContext("context",newcontext);
         OnPlay.Play(card,newcontext);
     }
-
     public void InstanciarLideres()
     {
         GameObject game = GameObject.Instantiate(Prefab, lidersqr1.transform);
@@ -139,13 +142,11 @@ public class GameManager : MonoBehaviour
         Scriptable.card = LiderDovakin;
         Scriptable.InicializaCarta();
         //lidersqr1.transform.GetChild(0).AddComponent<Lideres>();
-
         GameObject game1 = GameObject.Instantiate(Prefab, lidersqr2.transform);
         VisualCard Scriptable1 = game1.GetComponent<VisualCard>();
         Scriptable1.card = LiderAlduin;
         Scriptable1.InicializaCarta();
         //lidersqr2.transform.GetChild(0).AddComponent<Lideres>();
-
     }
     public void PrepareGame(List<Card> PlayerCards , GameObject CustomDeck)
     {
@@ -213,8 +214,7 @@ public class GameManager : MonoBehaviour
                 hijos[x].SetParent(Hand2.transform);
                 MoverObjeto(hijos[x] , Hand2.transform , nuevaescala);
             }
-        }
-        
+        }  
     }
     void MoverObjeto(Transform objeto, Transform nuevaPosicion, Vector2 nuevaEscala)
     {
@@ -226,12 +226,10 @@ public class GameManager : MonoBehaviour
         playedcard = 0;
         if(!CurrentPlayer)
         {
-
             Hand2.SetActive(false);
             Deck2.SetActive(false);
            // Deck2Back.SetActive(false);
             lidersqr2.SetActive(false);
-
             Hand1.SetActive(true);
             Deck1.SetActive(true);
             //Deck1Back.SetActive(true);
@@ -254,9 +252,26 @@ public class GameManager : MonoBehaviour
             CurrentPlayer = false;
         }
     }
-    //void Update()
-    //{
-    //    Actualizacion.Actualizar();
-    //}
+    void Update()
+    {
+        Instancia.CardsPlayer1 = CardsPlayer1;
+        Instancia.CardsPlayer2 = CardsPlayer2;    
+        Instancia.Deck1 = Deck1;    
+        Instancia.Deck2 = Deck2;
+        Instancia.Cementery1 = Cementery1;
+        Instancia.Cementery2 = Deck2;   
+        Instancia.A1 = A1;  
+        Instancia.A2 = A2;
+        Instancia.D1= D1;
+        Instancia.D2= D2;
+        Instancia.G1= G1;
+        Instancia.G2= G2;
+        Instancia.Clima11= Clima11; 
+        Instancia.Clima12= Clima12;
+        Instancia.Clima13= Clima13;
+        Instancia.Clima21= Clima21;
+        Instancia.Clima22= Clima22; 
+        Instancia.Clima23= Clima23;
+    }
     
 }

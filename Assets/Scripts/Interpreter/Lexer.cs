@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-
+using System.Diagnostics;
 
 namespace Skyrim_Interpreter
 {
@@ -30,8 +30,8 @@ namespace Skyrim_Interpreter
          public List<Token> Tokenizer() 
         {
             // ignore white spaces 
-           // source = source.Replace(" ", string.Empty);
-
+            // source = source.Replace(" ", string.Empty);
+            
             //regex 
             string keywords = @"\b(Effect|card|for|while|if|else|return|Params|Action|effect)\b";
             string indetifiers = @"^[a-zA-Z_][a-zA-Z0-9_]*";
@@ -111,7 +111,6 @@ namespace Skyrim_Interpreter
                 { acccess,Token_Type.ACCESS },
                 { strings , Token_Type.STRING },
                 { and,Token_Type.AND }
-               
             };
 
             //we need to scaning the source

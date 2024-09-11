@@ -21,3 +21,4 @@ MonoBehaviour:
   faction: Dovakin
   Range:
   - m
+  Owner: 1

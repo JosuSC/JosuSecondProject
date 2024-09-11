@@ -20,3 +20,4 @@ MonoBehaviour:
   EffectType: 0
   faction: Alduin
   Range: []
+  Owner: 1

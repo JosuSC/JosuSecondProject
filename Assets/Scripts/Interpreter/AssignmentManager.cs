@@ -18,6 +18,17 @@ namespace Skyrim_Interpreter
          if(dictionary.ContainsKey(key))return true;
             return false;   
         }
+
+        public static void ActualizarValor(string n,object o) 
+        {
+            if (Assignment.ContainsKey(n)) 
+            {
+                Assignment[n] = o;
+                return;
+            }
+            Assignment.Add(n, o);   
+        }
+
         public static void InputKeyParameter(ASTnode left ,ASTnode right) 
         {
             //si el left es un idebtificador
@@ -36,7 +47,8 @@ namespace Skyrim_Interpreter
                     else
                     {
                         object value = right.Evaluar();
-                       Parameters.Add(ident.value, value);
+                        if (value is not int && value is not bool && value is not string) throw new Exception("Parametro no valido");
+                        Parameters.Add(ident.value, value);
                     }
                 }
                 else 
@@ -53,10 +65,19 @@ namespace Skyrim_Interpreter
                 throw new InvalidOperationException("No se puede asignar un valor a algo que no sea una variable");
             }
         }
-        public static void InputKeyAssign(IdentifierASTNode left,ASTnode right) 
+
+        public static void MiContext(string cont,Context conteext) 
         {
-         
-                var value = right.Evaluar();
+            if (Assignment.ContainsKey(cont)) 
+            {
+                Assignment[cont] = conteext;
+                return;
+            }
+            Assignment.Add(cont, conteext); 
+        }
+        public static void InputKeyAssign(IdentifierASTNode left,ASTnode right,Context cont,Targets target) 
+        {
+                var value = right.Evaluar(cont,target);
                 Type obj = value.GetType();
                 Console.WriteLine(obj);
                 if (!Search(Assignment, left.value))
@@ -67,14 +88,12 @@ namespace Skyrim_Interpreter
                 {
                     Assignment[left.value] = value;   
                 } 
-            
-           
         }
-        public static void InputAssignmentwithValue(ASTnode left,ASTnode right,string oparator) 
+        public static void InputAssignmentwithValue(ASTnode left,ASTnode right,string oparator, Context cont, Targets target) 
         {
             if (left is IdentifierASTNode ident)
             {
-                object v1 = right.Evaluar();
+                object v1 = right.Evaluar(cont,target);
 
                 if (!Search(Assignment, ident.value))
                 {
@@ -111,13 +130,11 @@ namespace Skyrim_Interpreter
                 EffectAssignmet.Add(name, effect);  
             }
         }
-
         public static bool IsContainsEffcet(string name) 
         {
             if (EffectAssignmet.ContainsKey(name)) return true;
             return false;   
         }
-
         public static bool IsContainsAssignment(string name) 
         {
             if (Assignment.ContainsKey(name)) return true;

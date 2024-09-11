@@ -176,13 +176,13 @@ namespace Skyrim_Interpreter
                 ActionASTNode action = new ActionASTNode();
                 action = ActionNode(action);
                 effect.Action = action;
-                Advance();
+             
             }
             else { Console.WriteLine($"Estes effecto no tiene accion en su lugar tiene{Peek().Value}"); return null; }
-            comprobar = Consume(Token_Type.DELIMITIER,$"se esperaba un delitador y tenemos un {Peek().Value}");
-            if (comprobar == null) { Console.WriteLine("null en 173"); return null; }
+            if (!CheckValue("}")) throw new Exception($"Se esperaba un delimitador y tenmos un {Peek().Value}");
             //meter este effect en el dictionario
             effect.Evaluar();
+            Advance();  
             return effect;  
         }
         //los parametros de effect,en el caso que tenga
@@ -560,7 +560,6 @@ namespace Skyrim_Interpreter
                 Token assign= Previous();
                 ASTnode right = CreateNode();
                 if (node is not IdentifierASTNode id) throw new Exception("No tenemos variable");
-                GameContext.InputKeyAssign(id,right);
                 node = new AssignASTNode(node,right);
             }
             return node;

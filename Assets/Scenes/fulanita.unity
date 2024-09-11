@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 105005427}
   m_Layer: 5
   m_Name: Clima23
-  m_TagString: Untagged
+  m_TagString: Clima4
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -389,7 +389,7 @@ GameObject:
   - component: {fileID: 202988644}
   m_Layer: 5
   m_Name: Clima21
-  m_TagString: Untagged
+  m_TagString: Clima6
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1003,8 +1003,8 @@ GameObject:
   - component: {fileID: 565896681}
   - component: {fileID: 565896683}
   m_Layer: 5
-  m_Name: A1
-  m_TagString: Untagged
+  m_Name: AsedioP1
+  m_TagString: AsedioP1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1459,7 +1459,7 @@ GameObject:
   - component: {fileID: 830545572}
   m_Layer: 5
   m_Name: Clima22
-  m_TagString: Untagged
+  m_TagString: Clima5
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1574,7 +1574,7 @@ GameObject:
   - component: {fileID: 830549168}
   m_Layer: 5
   m_Name: Clima13
-  m_TagString: Untagged
+  m_TagString: Clima3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2053,8 +2053,8 @@ GameObject:
   - component: {fileID: 1308078073}
   - component: {fileID: 1308078075}
   m_Layer: 5
-  m_Name: D1
-  m_TagString: Untagged
+  m_Name: DistanciaP1
+  m_TagString: DistanciaP1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2170,8 +2170,8 @@ GameObject:
   - component: {fileID: 1308594327}
   - component: {fileID: 1308594329}
   m_Layer: 5
-  m_Name: D2
-  m_TagString: Untagged
+  m_Name: DistanciaP2
+  m_TagString: DistanciaP2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2748,8 +2748,8 @@ GameObject:
   - component: {fileID: 1495464951}
   - component: {fileID: 1495464953}
   m_Layer: 5
-  m_Name: A2
-  m_TagString: Untagged
+  m_Name: AsedioP2
+  m_TagString: AsedioP2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2866,7 +2866,7 @@ GameObject:
   - component: {fileID: 1522539624}
   m_Layer: 5
   m_Name: Clima12
-  m_TagString: Untagged
+  m_TagString: Clima2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4012,7 +4012,7 @@ GameObject:
   - component: {fileID: 1920342272}
   m_Layer: 5
   m_Name: Clima11
-  m_TagString: Untagged
+  m_TagString: Clima1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4126,8 +4126,8 @@ GameObject:
   - component: {fileID: 1949504096}
   - component: {fileID: 1949504098}
   m_Layer: 5
-  m_Name: G2
-  m_TagString: Untagged
+  m_Name: CuerpoP2
+  m_TagString: CuerpoP2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4733,8 +4733,8 @@ GameObject:
   - component: {fileID: 2092811261}
   - component: {fileID: 2092811263}
   m_Layer: 5
-  m_Name: G1
-  m_TagString: Untagged
+  m_Name: CuerpoP1
+  m_TagString: CuerpoP1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

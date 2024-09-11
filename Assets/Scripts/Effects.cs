@@ -9,7 +9,7 @@ public class Effects : MonoBehaviour
         for(int x = 0 ; x < MyPosition.parent.childCount-1 ; x ++)
         {
             VisualCard OnTarjet = MyPosition.parent.GetChild(x).GetComponent<VisualCard>();
-            if(OnTarjet.card.type == "oro" || OnTarjet.card.type == "Plata")
+            if(OnTarjet.card.type == "Oro" || OnTarjet.card.type == "Plata")
             {
                 // OnTarjet.card.Power = OnTarjet.card.Power += 2;
                 OnTarjet.Power.text = (OnTarjet.card.power += 2).ToString();
@@ -111,7 +111,6 @@ public class Effects : MonoBehaviour
     }
     public static void Plata(Transform Father)
     {
-
         Vector2 nuevaescala = new Vector2(1,1);
 
         if(Father.parent.tag == "Clima1P" || Father.parent.tag == "Clima2P" || Father.parent.tag == "Clima3P")

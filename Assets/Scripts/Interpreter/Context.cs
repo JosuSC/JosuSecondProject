@@ -28,8 +28,8 @@ namespace Skyrim_Interpreter
         public List<Card> F2 { get; set; }
         public List<Card> Graveyard1 { get; set; }
         public List<Card> Graveyard2 { get; set; }
-        public static Dictionary<string,Object> Asignments = new Dictionary<string,Object>();
-    public static Context Current
+        public static Dictionary<string, object> Asignments;
+        public static Context Current
     {
         get { return _current; }
         set { _current = value; }
@@ -44,7 +44,25 @@ namespace Skyrim_Interpreter
             this.D1= D1; this.D2 = D2;
             this.F1= f1; this.F2 = f2;  
             this.G1= G1; this.G2 = G2;
-            this.Graveyard1 = Grave1; this.Graveyard2 = Grave2;        
+            this.Graveyard1 = Grave1; this.Graveyard2 = Grave2;
+            Asignments = new Dictionary<string, object>
+            {
+                { "board", Board },
+                {"hand1",Hand1 },
+                {"hand2",Hand2 },
+                {"deck1",Deck1 },
+                {"deck2",Deck2 },
+                { "field1",F1},
+                {"field2",F2 },
+                {"graveyard1",Graveyard1 },
+                {"graveyard2",Graveyard2},
+                {"A1",A1 },
+                {"A2",A2 },
+                {"D1",D1 },
+                {"D2",D2 },
+                {"G1",G1 },
+                {"G2",G2 }
+            };
         }   
         public Hand HandOfPlayer(bool id) 
         {
@@ -142,16 +160,6 @@ namespace Skyrim_Interpreter
         }
 
     }
-    public class EffectDef
-    {
-        public string Name { get; set; }
-        List<string> Parameters { get; set; }
-        public EffectDef()
-        {
-            Parameters = new List<string>();
-        }
-    }
- 
     public interface ICard
     {
         public List<Card> Find(Predicate<Card> predicate);

@@ -12,7 +12,6 @@ namespace Skyrim_Interpreter
         public Targets Targets { get; set; }    
         public Context Context { get; set; }    
         public string destination { get; set; }
-
         public List<ASTnode> Parameters { get; set;}
         public ActionASTNode Action { get; set; }
 
@@ -27,7 +26,6 @@ namespace Skyrim_Interpreter
         public string Source { get; set;}
         public bool Single { get; set; }
         public  Predicate<Card> predicate { get; set;}
-
         public bool SelectCard(Card card) 
         {
             return predicate(card);

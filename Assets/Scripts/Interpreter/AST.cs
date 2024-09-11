@@ -84,7 +84,11 @@ namespace Skyrim_Interpreter
             {
                 return GameContext.Assignment[value];
             }
-            return value;
+            else if (Context.Asignments.ContainsKey(value)) 
+            {
+                return Context.Asignments[value];
+            }
+            return value ;
         }
         public override object Evaluar(Context context, Targets targets)
         {
@@ -176,7 +180,6 @@ namespace Skyrim_Interpreter
         }
         public override object Evaluar(Context context, Targets targets) { return Evaluar(); }
     }
-
     public class NotEqualASTNode : ASTnode
     {
         public Token_Type type = Token_Type.NOT_EQUAL;
@@ -234,7 +237,7 @@ namespace Skyrim_Interpreter
           
             if (Left is IdentifierASTNode ident)
             {
-                GameContext.InputKeyAssign(ident,this.Right);
+                GameContext.InputKeyAssign(ident,this.Right,context,targets);
             }
             else 
             {
@@ -261,7 +264,7 @@ namespace Skyrim_Interpreter
             
             if (left is IdentifierASTNode ident && GameContext.IsContainsAssignment(ident.value)) 
             {
-                GameContext.InputAssignmentwithValue(ident,this.right,this.value);
+                GameContext.InputAssignmentwithValue(ident,this.right,this.value,context,targets);
             }
             else
             {
@@ -368,16 +371,21 @@ namespace Skyrim_Interpreter
                 var ty = i.Parameters.Evaluar(context,targets);
                 if (ty is string )
                 {
-                    if (!GameContext.IsContainsAssignment(ty.ToString()))
+                    if (GameContext.IsContainsAssignment(ty.ToString()))
                     {
-                        throw new Exception("No existe ese objeto en nuestro context");
+                        list.Add(GameContext.Assignment[ty.ToString()]);
                     }
-                    list.Add(GameContext.Assignment[ty.ToString()]);
+                    else if (Context.Asignments.ContainsKey(ty.ToString())) 
+                    {
+                        list.Add(Context.Asignments[ty.ToString()]);
+                    }
+                    throw new Exception("No existe ese objeto en nuestro context");
                 }
                 else if (ty is int) 
                 {
                     list.Add(ty);
                 }
+                list.Add(ty);
             }
             if (left is IdentifierASTNode identifier && right is IdentifierASTNode identifier2)
             {
@@ -584,6 +592,7 @@ namespace Skyrim_Interpreter
             //Targets colec = (Targets)GameContext.Assignment[colection.value];
             foreach (var item in targets.targets)
             {
+              GameContext.ActualizarValor("target",item);
               block.Evaluar(context, targets);  
             }
             return true;
