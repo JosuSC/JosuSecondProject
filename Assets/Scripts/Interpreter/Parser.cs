@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Xml.Linq;
 using UnityEngine;
+using System.Xml;
+
 namespace Skyrim_Interpreter
 {
     internal class Parser
@@ -557,7 +559,8 @@ namespace Skyrim_Interpreter
             {
                 Token assign= Previous();
                 ASTnode right = CreateNode();
-                GameContext.InputKeyAssign(node,right);
+                if (node is not IdentifierASTNode id) throw new Exception("No tenemos variable");
+                GameContext.InputKeyAssign(id,right);
                 node = new AssignASTNode(node,right);
             }
             return node;
@@ -597,7 +600,6 @@ namespace Skyrim_Interpreter
                 ASTnode right = LambdaASTnode();
                 node = new AccessASTNode(node,right);           
             }
-          
             return node;
         }
         private ASTnode LambdaASTnode() 
@@ -703,7 +705,6 @@ namespace Skyrim_Interpreter
                     Advance();
                     if (Peek().Type == Token_Type.IDENTIFIER)
                     {
-                        if (!GameContext.IsContainsAssignment(Peek().Value)) { Console.WriteLine("El colection no existe "); return null; }
                         colcetion = new IdentifierASTNode(Peek().Type,Peek().Value);
                         Advance();
                         Consume(Token_Type.DELIMITIER, $"se esperaba un delimitador pero tenemos un {Peek().Value}");

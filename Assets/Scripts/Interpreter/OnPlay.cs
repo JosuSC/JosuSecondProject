@@ -29,12 +29,13 @@ namespace Skyrim_Interpreter
                     SelectorCardNode myselcetor = ecn.Selector;
                     if (myselcetor.Source == null) throw new InvalidOperationException("Necesitamos que en el selector ");
                     if (myselcetor.Predicate is not LambdaASTNode lambda) throw new InvalidOperationException("Estamos presentando problemas con el predicate del selector");
-                    GameContext.Assignment.Add(myselcetor.Source,new List<Card>());
-                    List<Card> source =(List<Card>)GameContext.Assignment[myselcetor.Source];
+                    List<Card> source = context.GetListByName(myselcetor.Source);
+                    if (source == null) throw new Exception("El source no existe en nuestro contexto");
                     Targets objective = DrawCards(source,lambda,context);
                     //ya tenemos el objetivo del effecto
                     myeffect.Targets = objective;
                     //llamamos al effecto
+                    MakeEffectcs.DoIt(myeffect,context);
                 }
                 else 
                 {
@@ -67,12 +68,16 @@ namespace Skyrim_Interpreter
                 t = equal.type;
                 r = equal.Right;
             }
-            else if (rightchild is NotEqualASTNode notequal) 
+            else if (rightchild is NotEqualASTNode notequal)
             {
                 if (!(notequal.Left is AccessASTNode acces)) { throw new InvalidOperationException("El hijo izquierdo del operador logico es debe ser del tipo acces"); }
                 a = acces;
                 t = notequal.type;
                 r = notequal.Right;
+            }
+            else 
+            {
+                throw new InvalidOperationException("El hijo derecho del operador lambda esta mal");
             }
             foreach (var item in source) 
             {
@@ -103,9 +108,9 @@ namespace Skyrim_Interpreter
             return false;
         }
         private static bool IsBooleanOperation(ASTnode node) => node is EqualASTNode || node is NotEqualASTNode || node is ComparationASTNode;
-        private static object IsAccess(ASTnode node, Card card)
+        private static object IsAccess(AccessASTNode node, Card card)
         {
-            if (node is AccessASTNode acc && acc.left is IdentifierASTNode && acc.right is IdentifierASTNode i)
+            if ( node.left is IdentifierASTNode && node.right is IdentifierASTNode i)
             {
                 return i.value switch
                 {

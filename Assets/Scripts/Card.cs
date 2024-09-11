@@ -53,7 +53,8 @@ public class Card : ScriptableObject
         }
         else if (EffectType == CardEffects.No_Effect) 
         {
-             //OnPlay.Play();
+            GameManager game = new GameManager();
+            game.EffectsForCards(this);
         }
     }
     private void OnMouseExit()

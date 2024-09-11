@@ -30,7 +30,6 @@ public class GameManager : MonoBehaviour
     public static int playedcard;
     void Awake()
     {
-
         if(Instancia is null)
         {
             Instancia = this;
@@ -63,10 +62,74 @@ public class GameManager : MonoBehaviour
         StarGame(CurrentPlayer);
         CurrentPlayer = false;
     }
-
-    public void EffectsForCards() 
+    //metodo para obtener las cartas hijas de los objects del juego
+    public List<Card> PasarHijos(GameObject father) 
     {
-        
+        VisualCard[] cards = father.transform.GetComponentsInChildren<VisualCard>();
+        List<Card> output = new List<Card>();   
+        foreach (var card in cards) 
+        {
+            output.Add(card.card);
+        }
+        return output;
+    }
+
+    public void EffectsForCards(Card card) 
+    {
+        //actualizamos el contexts
+        List<Card> A1 = PasarHijos(this.A1);
+        List<Card> A2 = PasarHijos(this.A2);
+        List<Card> D1 = PasarHijos(this.D1);
+        List<Card> D2 = PasarHijos(this.D2);
+        List<Card> G1 = PasarHijos(this.G1);
+        List<Card> G2 = PasarHijos(this.G2);
+        List<Card> Clima21 = PasarHijos(this.Clima21);
+        List<Card> Clima22 = PasarHijos(this.Clima22);
+        List<Card> Clima23 = PasarHijos(this.Clima23);
+        List<Card> Clima11 = PasarHijos(this.Clima11);
+        List<Card> Clima12 = PasarHijos(this.Clima12);
+        List<Card> Clima13 = PasarHijos(this.Clima13);
+        List<Card> Graveyard1 = PasarHijos(this.Cementery1);
+        List<Card> Graveyard2 = PasarHijos(this.Cementery2);
+        List<Card> Deck1 = PasarHijos(this.Deck1);
+        List<Card> Deck2 = PasarHijos(this.Deck2);
+        List<Card> Field1 = new List<Card>();
+        List<Card> Field2 = new List<Card>();
+        List<Card> Board = new List<Card>();
+        foreach (var item in A1)
+        {
+            Field1.Add(item);
+        }
+        foreach (var item in D1)
+        {
+            Field1.Add(item);
+        }
+        foreach (var item in G1)
+        {
+            Field1.Add(item);
+        }
+        foreach (var item in A2)
+        {
+            Field2.Add(item);
+        }
+        foreach (var item in D2)
+        {
+            Field2.Add(item);
+        }
+        foreach (var item in G2)
+        {
+            Field2.Add(item);
+        }
+        foreach (var item in Field1)
+        {
+            Board.Add(item);
+        }
+        foreach (var item in Field2)
+        {
+            Board.Add(item);
+        }
+        Context newcontext = new Context(CurrentPlayer,Board,this.CardsPlayer1,this.CardsPlayer2,A1,A2,D1,D2,G1,G2,Field1,Field2,Graveyard1,Graveyard2);
+        OnPlay.Play(card,newcontext);
     }
 
     public void InstanciarLideres()

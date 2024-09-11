@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Unity.Collections.LowLevel.Unsafe;
@@ -27,6 +28,7 @@ namespace Skyrim_Interpreter
         public List<Card> F2 { get; set; }
         public List<Card> Graveyard1 { get; set; }
         public List<Card> Graveyard2 { get; set; }
+        public static Dictionary<string,Object> Asignments = new Dictionary<string,Object>();
     public static Context Current
     {
         get { return _current; }
@@ -115,6 +117,17 @@ namespace Skyrim_Interpreter
         {
             get { return GraveyardOfPlayer(TriggerPlayer); }
         }
+
+        public List<Card> GetListByName(string name)
+        {
+            FieldInfo field = this.GetType().GetField(name, BindingFlags.Public | BindingFlags.Instance);
+            if (field != null && field.FieldType == typeof(List<Card>))
+            {
+                return (List<Card>)field.GetValue(this);
+            }
+            return null;
+        }
+
     }
     public class Targets 
     {

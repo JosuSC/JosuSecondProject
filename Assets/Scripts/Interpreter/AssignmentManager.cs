@@ -53,26 +53,22 @@ namespace Skyrim_Interpreter
                 throw new InvalidOperationException("No se puede asignar un valor a algo que no sea una variable");
             }
         }
-        public static void InputKeyAssign(ASTnode left,ASTnode right) 
+        public static void InputKeyAssign(IdentifierASTNode left,ASTnode right) 
         {
-            if (left is IdentifierASTNode ident)
-            {
+         
                 var value = right.Evaluar();
                 Type obj = value.GetType();
                 Console.WriteLine(obj);
-                if (!Search(Parameters, ident.value))
+                if (!Search(Assignment, left.value))
                 {
-                    Assignment.Add(ident.value,value);
+                    Assignment.Add(left.value,value);
                 }
                 else
                 {
-                    Assignment[ident.value] = value;   
+                    Assignment[left.value] = value;   
                 } 
-            }
-            else
-            {
-                throw new InvalidOperationException("No se puede asignar un valor a algo que no sea una variable");
-            }
+            
+           
         }
         public static void InputAssignmentwithValue(ASTnode left,ASTnode right,string oparator) 
         {
