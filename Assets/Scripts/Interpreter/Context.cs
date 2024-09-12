@@ -104,7 +104,6 @@ namespace Skyrim_Interpreter
             }
             return graveyard;   
         }
-
          public Field FieldOfPlayer(bool id) 
          {
           Field field = new Field();
@@ -160,7 +159,6 @@ namespace Skyrim_Interpreter
         {
             targets.Add(card);  
         }
-
     }
     public interface ICard
     {
@@ -175,9 +173,7 @@ namespace Skyrim_Interpreter
     public class CardsComponent : ICard
     {
         public List<Card> cards { get; set; } = new List<Card>();
-
         public void Push(Card card) => cards.Insert(0, card);
-
         public Card Pop()
         {
             if (cards.Count == 0) return null;
@@ -187,13 +183,11 @@ namespace Skyrim_Interpreter
         }
         public void SendBottom(Card card) => cards.Add(card);
         public List<Card> Find(Predicate<Card> predicate) => cards.FindAll(predicate);
-
         public void Shuffle()
         {
             System.Random rng = new System.Random();
             cards = cards.OrderBy(_ => rng.Next()).ToList();
         }
-
         public void Remove(Card  card) => cards.Remove(card);
     }
     public class Hand : CardsComponent { }

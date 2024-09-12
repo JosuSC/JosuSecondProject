@@ -228,7 +228,11 @@ namespace Skyrim_Interpreter
                     while (Peek().Value != "}")         //hasta aqui estas bien
                     {
                         action.actions.Add(CreateNode());
-                        if (Check(Token_Type.SEMICOLON)) Advance();
+                       if (Check(Token_Type.SEMICOLON)) 
+                       {
+                        action.actions.Add(new SemicolomASTNode());
+                        Advance(); 
+                       }
                     }
                   Advance();
                 }
@@ -639,7 +643,7 @@ namespace Skyrim_Interpreter
             while (Match(Token_Type.IDENTIFIER)) 
             {
                 IdentifierASTNode ident =  new IdentifierASTNode(Previous().Type, Previous().Value);
-                if (Peek().Type == Token_Type.LEFT_PAREN) { ident.Parameters = CreateNode();}
+                if (Peek().Type == Token_Type.LEFT_PAREN) { ident.Have = true; ident.Parameters = CreateNode();}
                 return ident;
             }
             if (Match(Token_Type.LEFT_PAREN))

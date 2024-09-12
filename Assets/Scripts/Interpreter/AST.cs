@@ -71,12 +71,13 @@ namespace Skyrim_Interpreter
     {
         public Token_Type type { get; set; }
         public string value { get; set; }
-
+        public bool Have { get; set; }
         public ASTnode Parameters { get; set;}
         public IdentifierASTNode(Token_Type type, string value) 
         {
             this.type = type;   
             this.value = value;
+            Have = false;
         }
         public override object Evaluar() 
         {
@@ -250,8 +251,8 @@ namespace Skyrim_Interpreter
 
     public class AssgnWithValueASTNode : ASTnode
     {
-        string value { get; set; }  
-        ASTnode left { get; set; }
+       public  string value { get; set; }  
+        public  ASTnode left { get; set; }
         public ASTnode right { get; set; }
         public AssgnWithValueASTNode( ASTnode left, string value, ASTnode right)
         {
@@ -489,8 +490,8 @@ namespace Skyrim_Interpreter
     }
     public class FactorASTNode : ASTnode
     {
-        Token_Type type { get; set; }
-        ASTnode leftchild { get; set; }
+       public  Token_Type type { get; set; }
+       public  ASTnode leftchild { get; set; }
         public ASTnode rightchild { get; set; }
         public FactorASTNode(ASTnode leftchild, Token_Type type, ASTnode rightchild)
         {
@@ -732,4 +733,17 @@ namespace Skyrim_Interpreter
         }
 
     }
+    public class SemicolomASTNode : ASTnode 
+    {
+        public string value = ";";
+            public override object Evaluar(Context context, Targets targets)
+        {
+            throw new NotImplementedException();
+        }
+        public override object Evaluar()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
 }

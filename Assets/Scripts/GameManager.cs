@@ -142,12 +142,12 @@ public class GameManager : MonoBehaviour
         VisualCard Scriptable = game.GetComponent<VisualCard>();
         Scriptable.card = LiderDovakin;
         Scriptable.InicializaCarta();
-        //lidersqr1.transform.GetChild(0).AddComponent<Lideres>();
+        lidersqr1.transform.GetChild(0).AddComponent<Lideres>();
         GameObject game1 = GameObject.Instantiate(Prefab, lidersqr2.transform);
         VisualCard Scriptable1 = game1.GetComponent<VisualCard>();
         Scriptable1.card = LiderAlduin;
         Scriptable1.InicializaCarta();
-        //lidersqr2.transform.GetChild(0).AddComponent<Lideres>();
+        lidersqr2.transform.GetChild(0).AddComponent<Lideres>();
     }
     public void PrepareGame(List<Card> PlayerCards , GameObject CustomDeck)
     {
