@@ -16,8 +16,8 @@ MonoBehaviour:
   imagen: {fileID: -3480363884831645253, guid: 095861b49e1cf2b4ba7d62f46f460c52, type: 3}
   power: 100
   type: Leader
-  IsCreated: 1
+  IsCreated: 0
   EffectType: 0
-  faction: Alduin
+  faction: Dovakin
   Range: []
-  Owner: 1
+  Owner: 0

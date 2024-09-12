@@ -12,15 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4117cd5955dc824e831fd18477f1b72, type: 3}
   m_Name: Senuelo
   m_EditorClassIdentifier: 
-  name: Mercer Frey
+  name: Senuelo
   imagen: {fileID: -7705316526168527885, guid: 80ed30ccf8501e54e9e8034cb175460e, type: 3}
   power: 0
   type: Senuelo
-  IsCreated: 1
-  EffectType: 4
+  IsCreated: 0
+  EffectType: 5
   faction: Dovakin
   Range:
-  - m
-  - r
-  - s
-  Owner: 1
+  - clima
+  Owner: 0

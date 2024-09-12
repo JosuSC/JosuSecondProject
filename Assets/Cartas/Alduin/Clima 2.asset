@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4117cd5955dc824e831fd18477f1b72, type: 3}
   m_Name: Clima 2
   m_EditorClassIdentifier: 
-  name: Lluvia de Flechas
-  imagen: {fileID: 5684407625452263655, guid: c8792d2a980e24549acafd9eab970474, type: 3}
+  name: Lluvia de hielo
+  imagen: {fileID: 1372061199041201086, guid: 438fd9d28d3a7a54c81044accf36ec30, type: 3}
   power: 0
   type: Clima
-  IsCreated: 1
-  EffectType: 2
+  IsCreated: 0
+  EffectType: 3
   faction: Alduin
   Range:
   - Clima
+  Owner: 1

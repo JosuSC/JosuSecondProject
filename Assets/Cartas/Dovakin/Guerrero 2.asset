@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4117cd5955dc824e831fd18477f1b72, type: 3}
   m_Name: Guerrero 2
   m_EditorClassIdentifier: 
-  name: caballero2
-  imagen: {fileID: -3602894393378691863, guid: 29fba04724898a441955211e7c4504f3, type: 3}
+  name: Guerra
+  imagen: {fileID: -5649794194571476075, guid: 66ef372452f7f23499f767f54f7b847a, type: 3}
   power: 5
-  type: Guerrero
-  IsCreated: 1
-  EffectType: 7
+  type: Plata
+  IsCreated: 0
+  EffectType: 10
   faction: Dovakin
   Range:
   - m
-  Owner: 1
+  Owner: 0

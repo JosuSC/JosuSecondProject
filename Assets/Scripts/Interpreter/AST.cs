@@ -643,7 +643,7 @@ namespace Skyrim_Interpreter
                 throw new InvalidOperationException("This card don't have any Effcet");
             }
             newcard.IsCreated = true;
-            newcard.EffectType = CardEffects.No_Effect;
+            newcard.EffectType = CardEffects.Created;
             GameContext.Cards.Add(this.Name,newcard);
             return true; 
         }

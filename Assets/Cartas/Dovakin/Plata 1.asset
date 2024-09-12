@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4117cd5955dc824e831fd18477f1b72, type: 3}
   m_Name: Plata 1
   m_EditorClassIdentifier: 
-  name: Hombre Lobo
+  name: Plata
   imagen: {fileID: 6214287684351836827, guid: 875e24a13fafb034da3c0339f6baf660, type: 3}
-  power: 14
+  power: 12
   type: Plata
-  IsCreated: 1
-  EffectType: 1
+  IsCreated: 0
+  EffectType: 2
   faction: Dovakin
   Range:
   - m
-  - r
   - s
-  Owner: 1
+  - r
+  Owner: 0

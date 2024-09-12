@@ -16,7 +16,8 @@ MonoBehaviour:
   imagen: {fileID: -7843319026229768340, guid: b062bca71e996fd43834f82c42e2a426, type: 3}
   power: 100
   type: Leader
-  IsCreated: 1
+  IsCreated: 0
   EffectType: 0
   faction: Alduin
   Range: []
+  Owner: 1

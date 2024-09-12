@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4117cd5955dc824e831fd18477f1b72, type: 3}
   m_Name: Clima 1
   m_EditorClassIdentifier: 
-  name: Lluvia de Fuego
+  name: Lluvia de fuego
   imagen: {fileID: -127012195401285244, guid: c38379ad3bb9db840974617a6358cf0c, type: 3}
   power: 0
   type: Clima
-  IsCreated: 1
-  EffectType: 2
+  IsCreated: 0
+  EffectType: 3
   faction: Alduin
   Range:
   - Clima
+  Owner: 1

@@ -26,10 +26,16 @@ namespace Skyrim_Interpreter
                     }
                     //obtenemos el efecto que vamos a realizar
                     myeffect = GameContext.EffectAssignmet[ecn.Name];
+                    UnityEngine.Debug.Log($"Encontro el effecto y es {myeffect.Name}");
                     if (ecn.Selector == null) { throw new InvalidOperationException("No podemos enviarles los targets al effecto si no tenemos un selector definido"); }
                     SelectorCardNode myselcetor = ecn.Selector;
+                    UnityEngine.Debug.Log($"El source que vamos a buscar es {myselcetor.Source}");
                     if (myselcetor.Source == null) throw new InvalidOperationException("Necesitamos que en el selector ");
+                    UnityEngine.Debug.Log("Board");
+                    UnityEngine.Debug.Log(myselcetor.Source);
                     if (myselcetor.Predicate is not LambdaASTNode lambda) throw new InvalidOperationException("Estamos presentando problemas con el predicate del selector");
+                    List<string> args = new List<string>() {"Hand1","Hand2","Deck1","Deck2","A1","A2","D1","D2","G1","G2","F1","F2","Graveyard1","Graveyard2","Board" };
+                    if (!args.Contains(myselcetor.Source)) throw new Exception("El source no existe en nuestro contexto");
                     List<Card> source = context.GetListByName(myselcetor.Source);
                     if (source == null) throw new Exception("El source no existe en nuestro contexto");
                     Targets objective = DrawCards(source,lambda,context);

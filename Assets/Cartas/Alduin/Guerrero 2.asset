@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4117cd5955dc824e831fd18477f1b72, type: 3}
   m_Name: Guerrero 2
   m_EditorClassIdentifier: 
-  name: Guerrero
-  imagen: {fileID: -6406077507581699368, guid: dcc7c4a2f22364e439da053d577ea980, type: 3}
+  name: Guerra
+  imagen: {fileID: 9083185764889175668, guid: c7bb24a9a8fe6924ea5e1607ac835c97, type: 3}
   power: 5
-  type: Guerrero
-  IsCreated: 1
-  EffectType: 7
+  type: Plata
+  IsCreated: 0
+  EffectType: 10
   faction: Alduin
   Range:
   - m
+  Owner: 1

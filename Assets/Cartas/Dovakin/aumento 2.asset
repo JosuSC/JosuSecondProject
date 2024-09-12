@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4117cd5955dc824e831fd18477f1b72, type: 3}
+  m_Name: aumento 2
+  m_EditorClassIdentifier: 
+  name: Merunes
+  imagen: {fileID: 4871081474454810647, guid: 2743c67e4473c7347aaa83c688170c2c, type: 3}
+  power: 0
+  type: Aumento
+  IsCreated: 0
+  EffectType: 4
+  faction: Dovakin
+  Range:
+  - m
+  - r
+  - s
+  Owner: 0

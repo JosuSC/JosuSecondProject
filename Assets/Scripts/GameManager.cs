@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
+        //Debug.Log(CardsPlayer1[0].GetComponent<CustomCollider>());
         // agregar cartas a los deck de los jugadores
         if (GameContext.Cards.Count != 0) 
         {

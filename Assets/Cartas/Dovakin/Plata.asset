@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4117cd5955dc824e831fd18477f1b72, type: 3}
   m_Name: Plata
   m_EditorClassIdentifier: 
-  name: Vampiro
+  name: Plata
   imagen: {fileID: -5687666349546342197, guid: 968c30269192c004887c276eae6f12de, type: 3}
-  power: 14
+  power: 12
   type: Plata
-  IsCreated: 1
-  EffectType: 1
+  IsCreated: 0
+  EffectType: 2
   faction: Dovakin
   Range:
   - m
-  - r
   - s
-  Owner: 1
+  - r
+  Owner: 0

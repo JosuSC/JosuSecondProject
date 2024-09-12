@@ -12,7 +12,7 @@ public class RoundsControler : MonoBehaviour
         Counter += 1;
         if(Counter > 1 && Rounds < 3)
         {
-            //CleanBoard.Clean();
+            CleanBoard.Clean();
             if(GameManager.Instancia.CurrentPlayer) 
             {
                 GameManager.Instancia.CurrentPlayer = false;
@@ -67,6 +67,5 @@ public class RoundsControler : MonoBehaviour
         }
         GameManager.Instancia.StarGame(GameManager.Instancia.CurrentPlayer);
     }
-
 }
    

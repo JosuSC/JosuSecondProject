@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4117cd5955dc824e831fd18477f1b72, type: 3}
   m_Name: Despeje 1
   m_EditorClassIdentifier: 
-  name: Despeje
+  name: Atronach
   imagen: {fileID: 5979337832079688653, guid: 281c9f6bdf014e242be18d8e94a8011e, type: 3}
   power: 0
   type: Despeje
-  IsCreated: 1
-  EffectType: 8
+  IsCreated: 0
+  EffectType: 9
   faction: Dovakin
   Range:
-  - Clima
-  Owner: 1
+  - clima
+  Owner: 0

@@ -135,17 +135,19 @@ namespace Skyrim_Interpreter
         {
             get { return GraveyardOfPlayer(TriggerPlayer); }
         }
-
         public List<Card> GetListByName(string name)
         {
+            UnityEngine.Debug.Log("Entro a FieldInf");
             FieldInfo field = this.GetType().GetField(name, BindingFlags.Public | BindingFlags.Instance);
+            UnityEngine.Debug.Log($"El valor de field es {field}");
             if (field != null && field.FieldType == typeof(List<Card>))
             {
+                UnityEngine.Debug.Log("eNCONTROOOOOOOOOOOOO");
                 return (List<Card>)field.GetValue(this);
             }
+            UnityEngine.Debug.Log("Va devolver null");
             return null;
         }
-
     }
     public class Targets 
     {

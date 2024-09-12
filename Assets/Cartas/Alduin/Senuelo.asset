@@ -13,13 +13,12 @@ MonoBehaviour:
   m_Name: Senuelo
   m_EditorClassIdentifier: 
   name: Senuelo
-  imagen: {fileID: -204505957576086280, guid: 73cc3c82312d67843b7a8e70a3d8e296, type: 3}
+  imagen: {fileID: 2640871827649562430, guid: 6518bfe62633b40408d38b0e6c958667, type: 3}
   power: 0
   type: Senuelo
-  IsCreated: 1
-  EffectType: 0
+  IsCreated: 0
+  EffectType: 5
   faction: Alduin
   Range:
-  - m
-  - s
-  - r
+  - clima
+  Owner: 1

@@ -12,14 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4117cd5955dc824e831fd18477f1b72, type: 3}
   m_Name: Plata 1
   m_EditorClassIdentifier: 
-  name: Sacerdote
-  imagen: {fileID: -7292222791889509515, guid: 26a7f02ecda04dd49bfdf504d785aeb1, type: 3}
+  name: Plata
+  imagen: {fileID: -2079189425053957854, guid: 54b762fac6f123f4dba668f46876ba5e, type: 3}
   power: 12
   type: Plata
-  IsCreated: 1
-  EffectType: 1
+  IsCreated: 0
+  EffectType: 2
   faction: Alduin
   Range:
   - m
-  - r
   - s
+  - r
+  Owner: 1

@@ -6,31 +6,33 @@ public class Effects : MonoBehaviour
 {
     public static void Aumento(Transform MyPosition)
     {
+        Debug.Log("Entro a aumneto");
         for(int x = 0 ; x < MyPosition.parent.childCount-1 ; x ++)
         {
             VisualCard OnTarjet = MyPosition.parent.GetChild(x).GetComponent<VisualCard>();
-            if(OnTarjet.card.type == "Oro" || OnTarjet.card.type == "Plata")
-            {
+            //if(OnTarjet.card.type == "Oro" || OnTarjet.card.type == "Plata")
+            //{
                 // OnTarjet.card.Power = OnTarjet.card.Power += 2;
                 OnTarjet.Power.text = (OnTarjet.card.power += 2).ToString();
-            }
-            else continue;
+            //}
+            //else continue;
         }
     }
     public static void ClimaResta(Transform MyPosition)
     {
         Transform ToAfect = null;
-        if(MyPosition.tag == "Clima1" && GameObject.Find("AsedioP1") is not null) ToAfect = GameObject.Find("AsedioP1").transform;
-        else if(MyPosition.tag == "Clima2" && GameObject.Find("DistanciaP1") is not null) ToAfect = GameObject.Find("DistanciaP1").transform;
-        else if(MyPosition.tag == "Clima3" && GameObject.Find("CuerpoP1") is not null) ToAfect = GameObject.Find("CuerpoP1").transform;
-        else if(MyPosition.tag == "Clima4" && GameObject.Find("CuerpoP2") is not null) ToAfect = GameObject.Find("CuerpoP2").transform;
-        else if(MyPosition.tag == "Clima5" && GameObject.Find("DistanciaP2") is not null) ToAfect = GameObject.Find("DistanciaP2").transform;
-        else if(MyPosition.tag == "Clima6" && GameObject.Find("AsedioP2") is not null) ToAfect = GameObject.Find("AsedioP2").transform;
+        if (MyPosition.tag == "Clima1" && GameObject.Find("AsedioP1") is not null) { ToAfect = GameObject.Find("AsedioP1").transform; UnityEngine.Debug.Log("Entro a a1"); }
+        else if (MyPosition.tag == "Clima2" && GameObject.Find("DistanciaP1") is not null) ToAfect = GameObject.Find("DistanciaP1").transform;
+        else if (MyPosition.tag == "Clima3" && GameObject.Find("CuerpoP1") is not null) ToAfect = GameObject.Find("CuerpoP1").transform;
+        else if (MyPosition.tag == "Clima4" && GameObject.Find("CuerpoP2") is not null) ToAfect = GameObject.Find("CuerpoP2").transform;
+        else if (MyPosition.tag == "Clima5" && GameObject.Find("DistanciaP2") is not null) ToAfect = GameObject.Find("DistanciaP2").transform;
+        else if (MyPosition.tag == "Clima6" && GameObject.Find("AsedioP2") is not null) ToAfect = GameObject.Find("AsedioP2").transform;
 
+        UnityEngine.Debug.Log($"Los hijos de ToAffect son {ToAfect.childCount}");
         for(int x = 0 ; x < ToAfect.childCount ; x ++)
         {
             VisualCard OnTarjet = ToAfect.GetChild(x).GetComponent<VisualCard>();
-            if(OnTarjet.card.type == "Oro" || OnTarjet.card.type == "Plata")
+            if (OnTarjet.card.type == "Oro" || OnTarjet.card.type == "Plata")
             {
                 OnTarjet.card.power = OnTarjet.card.power -= 2;
                 OnTarjet.Power.text = OnTarjet.card.power.ToString();
@@ -38,32 +40,32 @@ public class Effects : MonoBehaviour
             else continue;
         }
     }
-    //public static void Senuelo(Transform Father)
-    //{
-    //    if(Father.tag == "Clima1" || Father.tag == "Clima2" || Father.tag == "Clima2")
-    //    {
-    //        CustomCollider.otherCard.transform.SetParent(GameObject.Find("HandPlayer1").transform);
-    //    }
-    //    else
-    //    {
-    //        CustomCollider.otherCard.transform.SetParent(GameObject.Find("HandPlayer2").transform);
-    //    }
-    //}
-    //public static void Despeje(Transform Father)
-    //{
-    //    Vector2 nuevaescala = new Vector2(1,1);
+    public static void Senuelo(Transform Father)
+    {
+        if (Father.tag == "Clima1" || Father.tag == "Clima2" || Father.tag == "Clima3")
+        {
+            CustomCollider.otherCard.transform.SetParent(GameObject.Find("Hand1").transform);
+        }
+        else
+        {
+            CustomCollider.otherCard.transform.SetParent(GameObject.Find("Hand2").transform);
+        }
+    }
+    public static void Despeje(Transform Father)
+    {
+        Vector2 nuevaescala = new Vector2(1, 1);
 
-    //    if(Father.tag == "Clima1" || Father.tag == "Clima2" || Father.tag == "Clima2")
-    //    {
-    //        MoverObjeto(CustomCollider.otherCard.transform,GameManager.Instancia.Cementery2.transform,nuevaescala);
-    //        MoverObjeto(Father.GetChild(0),GameManager.Instancia.Cementery1.transform,nuevaescala);
-    //    }
-    //    else
-    //    {
-    //        MoverObjeto(CustomCollider.otherCard.transform,GameManager.Instancia.Cementery1.transform,nuevaescala);
-    //        MoverObjeto(Father.GetChild(0),GameManager.Instancia.Cementery2.transform,nuevaescala);
-    //    }
-    //}
+        if (Father.tag == "Clima1" || Father.tag == "Clima2" || Father.tag == "Clima3")
+        {
+            MoverObjeto(CustomCollider.otherCard.transform, GameManager.Instancia.Cementery2.transform, nuevaescala);
+            MoverObjeto(Father.GetChild(0), GameManager.Instancia.Cementery1.transform, nuevaescala);
+        }
+        else
+        {
+            MoverObjeto(CustomCollider.otherCard.transform, GameManager.Instancia.Cementery1.transform, nuevaescala);
+            MoverObjeto(Father.GetChild(0), GameManager.Instancia.Cementery2.transform, nuevaescala);
+        }
+    }
     private static void MoverObjeto(Transform objeto, Transform nuevaPosicion, Vector2 nuevaEscala)
     {
         objeto.transform.SetParent(nuevaPosicion);

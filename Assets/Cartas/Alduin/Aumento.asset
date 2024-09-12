@@ -12,14 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4117cd5955dc824e831fd18477f1b72, type: 3}
   m_Name: Aumento
   m_EditorClassIdentifier: 
-  name: Merunes
-  imagen: {fileID: -8256396302701296798, guid: c1ad5869e6ddec34cbb56e55238ac915, type: 3}
+  name: Molag Bal
+  imagen: {fileID: 8439710440215024576, guid: 9265e0cc460321d41ae4d6e3b66db749, type: 3}
   power: 0
   type: Aumento
-  IsCreated: 1
-  EffectType: 3
+  IsCreated: 0
+  EffectType: 4
   faction: Alduin
   Range:
   - m
   - r
   - s
+  Owner: 1

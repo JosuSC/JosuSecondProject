@@ -1,3 +1,4 @@
+using Unity.Collections;
 using UnityEngine;
 using UnityEngine.Accessibility;
 using UnityEngine.EventSystems;
@@ -96,22 +97,25 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         canvasGroup.alpha = 1f;
         // Bloquea las interacciones con otros objetos
         canvasGroup.blocksRaycasts = true;
-        
-        //if(CustomCollider.IsCalling)
-        //{
-            //draggedObject.transform.SetParent(CustomCollider.otherCard.transform.parent);
-            //GameManager.playedcard = 1;
-            //RoundsControler.Counter = 0;
-            //if (!GameManager.Instancia.CurrentPlayer) GameManager.Instancia.CurrentPlayer = true;
-            //else GameManager.Instancia.CurrentPlayer = false;
-            //draggedObject.GetComponent<VisualCard>().card.ActivateEffect(draggedObject);
-            //GameManager.Instancia.StarGame(GameManager.Instancia.CurrentPlayer);
-        //}
+
+        if(CustomCollider.IsCalling)
+        {
+            draggedObject.transform.SetParent(CustomCollider.otherCard.transform.parent);
+            GameManager.playedcard = 1;
+            RoundsControler.Counter = 0;
+            if (!GameManager.Instancia.CurrentPlayer) GameManager.Instancia.CurrentPlayer = true;
+            else GameManager.Instancia.CurrentPlayer = false;
+
+            //activar efecto
+          //  GameManager.Instancia.ActualiceContext();
+            draggedObject.GetComponent<VisualCard>().card.ActivateEffect(draggedObject);
+           // GameManager.Instancia.ActualiceVisual();
+            GameManager.Instancia.StarGame(GameManager.Instancia.CurrentPlayer);
+        }
 
         //Verificar si el objeto fue soltado en una zona valida
-        if (!IsDroppedInValidZone(eventData))
+        else if (!IsDroppedInValidZone(eventData))
         {
-            Debug.Log("Oye si entro");
             rectTransform.anchoredPosition = startPosition;
         }
         else 
@@ -124,8 +128,13 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                 RoundsControler.Counter = 0;
                 if (!GameManager.Instancia.CurrentPlayer) GameManager.Instancia.CurrentPlayer = true;
                 else GameManager.Instancia.CurrentPlayer = false;
-                GameManager.Instancia.StarGame(GameManager.Instancia.CurrentPlayer);
+
+                //activar efecto
+               // GameManager.Instancia.ActualiceContext();
                 draggedObject.GetComponent<VisualCard>().card.ActivateEffect(draggedObject);
+               // GameManager.Instancia.ActualiceVisual();
+                GameManager.Instancia.StarGame(GameManager.Instancia.CurrentPlayer);
+
             }
             
         }
@@ -139,22 +148,46 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         // Intenta obtener el componente ValidZone del objeto sobre el cual se soltó el objeto arrastrado
         ValidZone validZone = droppedOnObject.GetComponent<ValidZone>();
         
-        TipoDeCarta = draggedObject.GetComponent<VisualCard>().card.type;
-        Debug.Log(TipoDeCarta);
-        Debug.Log(validZone != null);
+        TipoDeCarta = draggedObject.GetComponent<VisualCard>().card.type.ToString();
 
-        if ((TipoDeCarta == "Oro" || TipoDeCarta == "Plata" || TipoDeCarta == "Clima" || TipoDeCarta == "Distancia" || TipoDeCarta == "Guerrero" || TipoDeCarta == "Senuelo" || TipoDeCarta == "Asedio" || TipoDeCarta == "Despeje"|| TipoDeCarta =="Aumento") && validZone != null)
+        if((TipoDeCarta == "Oro" || TipoDeCarta == "Plata") && validZone is not null && GameManager.Instancia.CurrentPlayer == validZone.OyeSiii)
         {
-            Debug.Log("Entro");
             string [] ranges = draggedObject.GetComponent<VisualCard>().card.Range;
             foreach (var item in ranges)
             {
                 if(item.ToString() == validZone.ZoneType)
                 {
+                    CustomCollider customCollider = draggedObject.GetComponent<CustomCollider>();
+                    customCollider._enabled = false;
                     return true;
                 }
             }
             return false;
+        }
+        else if(TipoDeCarta == "Clima" && validZone is not null)
+        {
+            if(validZone.ZoneType == "Clima") 
+            {
+                CustomCollider customCollider = draggedObject.GetComponent<CustomCollider>();
+ 
+ //               Debug.Log(customCollider._enabled);
+                customCollider._enabled = false;
+                return true;
+            }
+            else return false;
+        }
+        else if(TipoDeCarta == "Aumento" && validZone is not null && GameManager.Instancia.CurrentPlayer == validZone.OyeSiii)
+        {
+            if(validZone.ZoneType == "m" || validZone.ZoneType == "r" || validZone.ZoneType == "s")
+            {
+                return true;
+            }
+            else return false;
+        }
+        else if(TipoDeCarta == "Despeje" || TipoDeCarta == "Senuelo")
+        {
+            if(CustomCollider.IsCalling) return true;
+            else return false;
         }
         return false;
     }

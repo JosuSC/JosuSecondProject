@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Asedio
   m_EditorClassIdentifier: 
   name: Asedio
-  imagen: {fileID: 1813037250363074041, guid: b3f8e17748709a240b9ee50460eaaf85, type: 3}
+  imagen: {fileID: -8083507683248243803, guid: 96bd7ecb9afbfba448d0c13f6a7f093d, type: 3}
   power: 12
-  type: Asedio
-  IsCreated: 1
-  EffectType: 6
+  type: Oro
+  IsCreated: 0
+  EffectType: 10
   faction: Dovakin
   Range:
   - s
-  Owner: 1
+  Owner: 0

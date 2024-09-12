@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: Asedio
   m_EditorClassIdentifier: 
   name: Asedio
-  imagen: {fileID: 1813037250363074041, guid: b3f8e17748709a240b9ee50460eaaf85, type: 3}
+  imagen: {fileID: -8039044104615360970, guid: df6a55aaa81e40e419f30e3bdc9df141, type: 3}
   power: 12
-  type: Asedio
-  IsCreated: 1
-  EffectType: 6
+  type: Oro
+  IsCreated: 0
+  EffectType: 10
   faction: Alduin
   Range:
   - s
+  Owner: 1

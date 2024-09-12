@@ -9,7 +9,7 @@ using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 [System.Serializable]
 public enum Faction { Dovakin, Alduin }
-public enum CardEffects {Leader, oro, plata, clima, aumento, senuelo,distancia,asedio,guerrero ,despeje, No_Effect };
+public enum CardEffects {Leader, oro, plata, clima, aumento, senuelo,distancia,asedio,guerrero ,despeje, No_Effect,Created };
 
 [CreateAssetMenu(fileName = "newCard" , menuName = "Card")]
 public class Card : ScriptableObject
@@ -52,7 +52,19 @@ public class Card : ScriptableObject
         {
             Effects.Plata(DroppedCard.transform);
         }
-        else if (EffectType == CardEffects.No_Effect) 
+        else if (EffectType == CardEffects.clima)
+        {
+            Effects.ClimaResta(DroppedCard.transform.parent);
+        }
+        else if (EffectType == CardEffects.senuelo)
+        {
+            Effects.Senuelo(DroppedCard.transform.parent);
+        }
+        else if (EffectType == CardEffects.despeje) 
+        {
+            Effects.Despeje(DroppedCard.transform.parent);
+        }
+        else if (EffectType == CardEffects.Created)
         {
             GameManager game = GameManager.Instancia;
             game.EffectsForCards(this);
