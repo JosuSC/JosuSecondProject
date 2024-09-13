@@ -34,13 +34,14 @@ namespace Skyrim_Interpreter
                     UnityEngine.Debug.Log("Board");
                     UnityEngine.Debug.Log(myselcetor.Source);
                     if (myselcetor.Predicate is not LambdaASTNode lambda) throw new InvalidOperationException("Estamos presentando problemas con el predicate del selector");
-                    List<string> args = new List<string>() {"Hand1","Hand2","Deck1","Deck2","A1","A2","D1","D2","G1","G2","F1","F2","Graveyard1","Graveyard2","Board" };
+                    List<string> args = new List<string>() { "hand1", "hand2", "deck1", "deck2", "field1", "field2", "graveyard1", "graveyard2", "board" };
                     if (!args.Contains(myselcetor.Source)) throw new Exception("El source no existe en nuestro contexto");
-                    List<Card> source = context.GetListByName(myselcetor.Source);
+                    List<Card> source = Context.Asignments[myselcetor.Source];
                     if (source == null) throw new Exception("El source no existe en nuestro contexto");
                     Targets objective = DrawCards(source,lambda,context);
                     //ya tenemos el objetivo del effecto
                     myeffect.Targets = objective;
+                    UnityEngine.Debug.Log($"el count del source es de {myeffect.Targets.targets.Count}");
                     //llamamos al effecto
                     MakeEffectcs.DoIt(myeffect,context);
                 }
@@ -119,13 +120,15 @@ namespace Skyrim_Interpreter
         {
             if ( node.left is IdentifierASTNode && node.right is IdentifierASTNode i)
             {
+                UnityEngine.Debug.Log($"Quieres acceder al atributo de {i.value}");
+
                 return i.value switch
                 {
-                    "Name" => card.name,
-                    "Faction" => card.faction,
+                    "name" => card.name,
+                    "faction" => card.faction,
                     "Range" => card.Range,
-                    "Type" => card.type,
-                    "Power" => card.power,
+                    "type" => card.type,
+                    "power" => card.power,
                     _ => throw new InvalidOperationException("No estás accediendo a ningún atributo de la carta")
                 };
             }

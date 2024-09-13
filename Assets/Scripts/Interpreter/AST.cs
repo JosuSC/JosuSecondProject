@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 //using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
-
+using UnityEditor.Tilemaps;
 
 namespace Skyrim_Interpreter
 {
@@ -60,7 +60,10 @@ namespace Skyrim_Interpreter
 
         public override object Evaluar() 
         {
+            UnityEngine.Debug.Log("Entramos a evaluar un suma");
+            UnityEngine.Debug.Log("eavluamos su hijo izq");
             var left = LeftChild.Evaluar();
+            UnityEngine.Debug.Log("evaluamos su hd");
             var right = RightChild.Evaluar();
             return Ayudante.EvaluateBinary(left,this.type,right);
         }
@@ -81,13 +84,21 @@ namespace Skyrim_Interpreter
         }
         public override object Evaluar() 
         {
+            UnityEngine.Debug.Log($"evaluamos un identificador de {value}");
             if (GameContext.Assignment.ContainsKey(value))
             {
+                UnityEngine.Debug.Log("esta en gamecontext");
                 return GameContext.Assignment[value];
             }
             else if (Context.Asignments.ContainsKey(value)) 
             {
+                UnityEngine.Debug.Log("esta en context del juego");
                 return Context.Asignments[value];
+            }
+            else if (GameContext.Parameters.ContainsKey(value)) 
+            {
+                UnityEngine.Debug.Log("esta en parametros");
+                return GameContext.Parameters[value];
             }
             return value ;
         }
@@ -111,7 +122,10 @@ namespace Skyrim_Interpreter
 
         public override object Evaluar()
         {
+            UnityEngine.Debug.Log("evaluar -");
+            UnityEngine.Debug.Log("izq");
             var left = LeftChild.Evaluar();
+            UnityEngine.Debug.Log("derecho");
             var right = RightChild.Evaluar();
             return Ayudante.EvaluateBinary(left, this.type, right);
         }
@@ -132,6 +146,7 @@ namespace Skyrim_Interpreter
 
         public override object Evaluar()
         {
+
             var left = Number.Evaluar();
             var right = Pow.Evaluar();
             return Ayudante.EvaluateBinary(left, this.type, right);
@@ -153,7 +168,10 @@ namespace Skyrim_Interpreter
         }
         public override object Evaluar()
         {
+            UnityEngine.Debug.Log("eavlaur and");
+            UnityEngine.Debug.Log("izq");
             var left = this.left.Evaluar();
+            UnityEngine.Debug.Log("derech");
             var right = this.right.Evaluar();
             return Ayudante.EvaluateBinary(left, this.type, right);
         }
@@ -175,7 +193,10 @@ namespace Skyrim_Interpreter
         }
         public override object Evaluar()
         {
+            UnityEngine.Debug.Log("Evaluar un or");
+            UnityEngine.Debug.Log("izquierdo");
             var left = this.left.Evaluar();
+            UnityEngine.Debug.Log("derecho");
             var right = this.right.Evaluar();
             return Ayudante.EvaluateBinary(left, this.type, right);
         }
@@ -188,14 +209,17 @@ namespace Skyrim_Interpreter
         public ASTnode Right { get; private set; }
 
         public NotEqualASTNode(ASTnode left, ASTnode right)
-
         {
+
             Left = left;
             Right = right;
         }
         public override object Evaluar() 
         {
+            UnityEngine.Debug.Log("Evaluar un notequ");
+            UnityEngine.Debug.Log("izquierdo");
             var left = this.Left.Evaluar( );
+            UnityEngine.Debug.Log("derecho");
             var right = this.Right.Evaluar( );
             return Ayudante.EvaluateBinary(left,this.type,right);
         }
@@ -215,7 +239,10 @@ namespace Skyrim_Interpreter
         }
         public override object Evaluar() 
         {
+            UnityEngine.Debug.Log("Evaluar un ");
+            UnityEngine.Debug.Log("izquierdo");
             var left = this.Left.Evaluar();
+            UnityEngine.Debug.Log("derecho");
             var right = this.Right.Evaluar();
             return Ayudante.EvaluateBinary(left,this.type,right);
         }
@@ -235,7 +262,7 @@ namespace Skyrim_Interpreter
         }
         public override object Evaluar(Context context, Targets targets)
         {
-          
+            UnityEngine.Debug.Log("Evaluar una asignacion");
             if (Left is IdentifierASTNode ident)
             {
                 GameContext.InputKeyAssign(ident,this.Right,context,targets);
@@ -262,7 +289,7 @@ namespace Skyrim_Interpreter
         }
         public override object Evaluar(Context context, Targets targets)
         {
-            
+            UnityEngine.Debug.Log("Evaluar un ");
             if (left is IdentifierASTNode ident && GameContext.IsContainsAssignment(ident.value)) 
             {
                 GameContext.InputAssignmentwithValue(ident,this.right,this.value,context,targets);
@@ -286,7 +313,8 @@ namespace Skyrim_Interpreter
         }
         public override object Evaluar(Context context, Targets targets)
         {
-            if(Son is not IdentifierASTNode sn) {throw new Exception("No estamos trabajando con una variable");}
+            UnityEngine.Debug.Log("Evaluar un unary");
+            if (Son is not IdentifierASTNode sn) {throw new Exception("No estamos trabajando con una variable");}
             object soo = null;
                 if (!GameContext.IsContainsAssignment(sn.value)) { throw new Exception("No existe en nuestro contexto esa variable"); }
                  soo = GameContext.Assignment[sn.value];
@@ -305,7 +333,7 @@ namespace Skyrim_Interpreter
             this.right = right;
         }
         public override object Evaluar(){return null;}
-        public override object Evaluar(Context context, Targets targets) { return null;}
+        public override object Evaluar(Context context, Targets targets) { UnityEngine.Debug.Log("Evaluar un colon el cual no se deberia evaluar"); return null;}
     }
     public class Params : ASTnode
     {
@@ -314,6 +342,7 @@ namespace Skyrim_Interpreter
         public override object Evaluar(){ return null;}
         public override object Evaluar(Context context, Targets targets) 
         {
+            UnityEngine.Debug.Log("Evaluar un parametros");
             foreach (var item in param)
             {
                 item.Evaluar(context, targets);
@@ -341,6 +370,7 @@ namespace Skyrim_Interpreter
         }
         public override object Evaluar(Context context, Targets targets)
         {
+            UnityEngine.Debug.Log("Evaluar un block de codigo de algun while o for o algo");
             Block.Evaluar(context,targets);
             return true;
         }
@@ -366,10 +396,15 @@ namespace Skyrim_Interpreter
         //ejemplos a evaluar context.hand.power.
         public override object Evaluar(Context context, Targets targets)
         {
+            UnityEngine.Debug.Log("Evaluar un access");
             List<object> list = new List<object>();
             if (this.right is IdentifierASTNode i && i.Parameters != null) 
             {
+                UnityEngine.Debug.Log($"Tenemos como hijo derecho a {i.value} y su parametros es {i.Parameters} ");
+
                 var ty = i.Parameters.Evaluar(context,targets);
+
+                UnityEngine.Debug.Log($"El parametro es {ty} y el del tipo {ty.GetType()}");
                 if (ty is string )
                 {
                     if (GameContext.IsContainsAssignment(ty.ToString()))
@@ -390,14 +425,16 @@ namespace Skyrim_Interpreter
             }
             if (left is IdentifierASTNode identifier && right is IdentifierASTNode identifier2)
             {
-                Ayudante.ReturnList(identifier.value, identifier2.value, context,list.ToArray());
+               return Ayudante.ReturnList(identifier.value, identifier2.value, context, list.ToArray());
             }
-            else if (left is AccessASTNode t && right is IdentifierASTNode ide )
+            else if (left is AccessASTNode t && right is IdentifierASTNode ide)
             {
-                object a = t.Evaluar(context,targets);
+                UnityEngine.Debug.Log("el hijo izquierdo es un acces");
+                object a = t.Evaluar(context, targets);
+                UnityEngine.Debug.Log($" el object es de tipo{a.GetType()}");
                 return Ayudante.ReturnChangeAux(a, ide.value, list.ToArray());
             }
-            throw new InvalidOperationException("Error en los access");
+                throw new InvalidOperationException("Error en los access");  
         }
          public override object Evaluar() { throw new NotImplementedException(); }
     }
@@ -416,10 +453,12 @@ namespace Skyrim_Interpreter
 
         public override object Evaluar(Context context, Targets targets)
         {
+            UnityEngine.Debug.Log("Evaluar un action");
             for (int i = 0; i < actions.Count; i++)
             {
                 actions[i].Evaluar(context, targets);   
             }
+            UnityEngine.Debug.Log("terminamos de evaluar el action ");
             return true;
         }
         public override object Evaluar() { throw new NotImplementedException(); }
@@ -464,7 +503,10 @@ namespace Skyrim_Interpreter
         }
         public override object Evaluar()
         {
-            var left = this.left.Evaluar(); 
+            UnityEngine.Debug.Log($"Evaluar un comparacion con {type}");
+            UnityEngine.Debug.Log("izq");
+            var left = this.left.Evaluar();
+            UnityEngine.Debug.Log("derech ");
             var right = this.right.Evaluar();
             return Ayudante.EvaluateBinary(left,this.type,right);
         }
@@ -482,7 +524,8 @@ namespace Skyrim_Interpreter
         }
         public override object Evaluar()
         {
-           var left = this.left.Evaluar();
+            UnityEngine.Debug.Log("concatenacion ");
+            var left = this.left.Evaluar();
            var right = this.right.Evaluar();
             return Ayudante.EvaluateBinary(left,this.type,right); 
         }
@@ -501,6 +544,7 @@ namespace Skyrim_Interpreter
         }
         public override object Evaluar()
         {
+            UnityEngine.Debug.Log($"Evaluar un factor con {type}");
             var left = leftchild.Evaluar(); 
             var right = rightchild.Evaluar();
             return Ayudante.EvaluateBinary(left,this.type,right);
@@ -518,16 +562,20 @@ namespace Skyrim_Interpreter
         }
         public override object Evaluar() 
         {
+            UnityEngine.Debug.Log("Evaluar un literal");
             if (Type == Token_Type.NUMBER)
             {
+                UnityEngine.Debug.Log("Es un entero ");
                 return int.Parse(value);
             }
             else if (Type == Token_Type.STRING)
             {
+                UnityEngine.Debug.Log("Es un string ");
                 return value;
             }
             else if (Type == Token_Type.BOOLEAN)
             {
+                UnityEngine.Debug.Log("Es un bolleano");
                 return bool.Parse(value);
             }
              return null;
@@ -541,11 +589,12 @@ namespace Skyrim_Interpreter
         {
             this.groupnode = groupnode; 
         }
-        public override object Evaluar()
+        public override object Evaluar() {return null;}
+        public override object Evaluar(Context context, Targets targets) 
         {
-            return groupnode.Evaluar();
-        }
-        public override object Evaluar(Context context, Targets targets) { return Evaluar();}   
+            UnityEngine.Debug.Log("Evaluar un group");
+            return groupnode.Evaluar(context,targets);
+        }   
     }
     public class WhileASTNode  : ASTnode
     {
@@ -558,6 +607,8 @@ namespace Skyrim_Interpreter
         }
         public override object Evaluar(Context context,Targets targets) 
         {
+            UnityEngine.Debug.Log("Evaluar un while");
+            
             bool continueLoop = true;
             while (continueLoop)
             {
@@ -572,8 +623,10 @@ namespace Skyrim_Interpreter
                 }
                 if (continueLoop)
                 {
-                  block.Evaluar(context, targets);
+                    UnityEngine.Debug.Log("la condicion es verdadera ");
+                    block.Evaluar(context, targets);
                 }
+                UnityEngine.Debug.Log("Terminamos el blucle while ");
             }
             return true;
         }
@@ -590,12 +643,14 @@ namespace Skyrim_Interpreter
         }
         public override object Evaluar(Context context, Targets targets)
         {
+            UnityEngine.Debug.Log("Evaluar un  For");
             //Targets colec = (Targets)GameContext.Assignment[colection.value];
-            foreach (var item in targets.targets)
+            foreach (Card item in targets.targets)
             {
               GameContext.ActualizarValor("target",item);
               block.Evaluar(context, targets);  
             }
+            UnityEngine.Debug.Log("Se termino de evaluar el for ");
             return true;
         }
         public override object Evaluar(){ throw new NotImplementedException();}
@@ -719,7 +774,10 @@ namespace Skyrim_Interpreter
         }
         public override object Evaluar(Context context, Targets targets)
         {
+            UnityEngine.Debug.Log("Evaluar un lambda");
+            UnityEngine.Debug.Log("izq");
             var left = Left.Evaluar(context, targets);
+            UnityEngine.Debug.Log("derech ");
             var right = Right.Evaluar(context, targets);
 
             if (left is not string st) throw new InvalidOperationException("No estas pasando un objeto");

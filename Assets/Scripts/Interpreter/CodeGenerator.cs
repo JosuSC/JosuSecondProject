@@ -26,7 +26,7 @@ namespace Assets.Scripts.Interpreter
         {
             using (StreamWriter writer = new StreamWriter(output))
             {
-                writer.Write("using System; \n using System.Linq; \n using Skyrim_Interpreter;");
+                writer.Write("using System;\nusing System.Collections.Generic ;\n using System.Linq; \n using Skyrim_Interpreter;");
                 writer.WriteLine();
                 writer.WriteLine("public class EffectGenerator \n{");
 
@@ -94,7 +94,7 @@ namespace Assets.Scripts.Interpreter
             {
                 if (assign.Left is not IdentifierASTNode id) throw new Exception("Esta mal");
                 string typeofvariable = GameContext.Assignment.ContainsKey(id.value) ? "" : "var";
-                return $"\n{typeofvariable} {id.value} = {GenerateAction(writer, assign.Right)}";
+                return $"{typeofvariable} {id.value} = {GenerateAction(writer, assign.Right)}";
             }
             else if (action is AccessASTNode access)
             {
@@ -114,7 +114,7 @@ namespace Assets.Scripts.Interpreter
                     string parameter = "";
                     if (i2.Have)
                     {
-                        if (i2.Parameters != null && i2.Parameters is IdentifierASTNode ii) parameter = $"( var {ii.value})";
+                        if (i2.Parameters != null && i2.Parameters is IdentifierASTNode ii) parameter = $"({ii.value})";
                         else parameter = "();";
                     }
                     last = i2.value + parameter;
@@ -129,6 +129,8 @@ namespace Assets.Scripts.Interpreter
             else if (action is WhileASTNode whil)
             {
                 ASTnode condition = whil.condition;
+                Debug.Log($"el ast condition esssssssssssssssssssssssssss{condition}");
+           
                 string mycondition = GenerateAction(writer, condition);
                 Debug.Log($"La condiciooooooooonnnnnnnnnnnn eeeeeeeessssssssssss {mycondition}");
                 string body = "";
@@ -137,7 +139,7 @@ namespace Assets.Scripts.Interpreter
                     body += GenerateAction(writer, item);
                 }
                 string w = "";
-                w += $"\n  While({mycondition})";
+                w += $"\n  while({mycondition})";
                 w += "{\n";
                 w += $"{body}";
                 w += "\n}";
@@ -197,8 +199,8 @@ namespace Assets.Scripts.Interpreter
             }
             else if (action is IdentifierASTNode i)
             {
-                string typeofvariable = GameContext.Assignment.ContainsKey(i.value) ? "" : "var";
-                return $"{typeofvariable} {i.value}";
+               // string typeofvariable = GameContext.Assignment.ContainsKey(i.value) ? "" : "var";
+                return $" {i.value}";
             }
             else if (action is UnaryASTNode u)
             {
@@ -206,9 +208,13 @@ namespace Assets.Scripts.Interpreter
                 else if (u.value == "--") return $"{u.Son}--";
                 else return $"!{u.Son}";
             }
-            else if (action is GroupingASTNode grup) 
+            else if (action is GroupingASTNode grup)
             {
-                return $"({GenerateAction(writer,grup.groupnode)})";
+                return $"({GenerateAction(writer, grup.groupnode)})";
+            }
+            else if (action is ConditionalASTNode condicc)
+            {
+                return $"{GenerateAction(writer,condicc.condicion)}";
             }
             return "";
         }

@@ -230,7 +230,7 @@ namespace Skyrim_Interpreter
                         action.actions.Add(CreateNode());
                        if (Check(Token_Type.SEMICOLON)) 
                        {
-                        action.actions.Add(new SemicolomASTNode());
+                       // action.actions.Add(new SemicolomASTNode());
                         Advance(); 
                        }
                     }

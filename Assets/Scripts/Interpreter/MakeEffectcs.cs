@@ -10,6 +10,7 @@ namespace Skyrim_Interpreter
     {
         public static void DoIt(Effect effect ,Context context) 
         {
+            UnityEngine.Debug.Log($"Se mando a hacer el effecto {effect.Name}");
             effect.Action.Evaluar(context,effect.Targets);
         }
 

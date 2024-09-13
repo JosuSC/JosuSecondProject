@@ -82,16 +82,17 @@ namespace Skyrim_Interpreter
                     throw new InvalidOperationException("Invalid types for power evaluation");
 
                 case Token_Type.GREATER:
-                    if (IsNumber(left, right)) return (double)left > (double)right;
+                    if (IsNumber(left, right)) return (int)left > (int)right;
                     throw new InvalidOperationException("Invalid types for greater evaluation");
                 case Token_Type.LESS:
-                    if (IsNumber(left, right)) return (double)left < (double)right;
+                    if (IsNumber(left, right)) return (int)left < (int)right;
+                    UnityEngine.Debug.Log($"tenemos como hijo izquierdo a{left.GetType()} y derecho{right.GetType()} para aplicarle el {type}");
                     throw new InvalidOperationException("Invalid types for less evaluation");
                 case Token_Type.LESS_EQUAL:
-                    if (IsNumber(left, right)) return (double)left <= (double)right;
+                    if (IsNumber(left, right)) return (int)left <= (int)right;
                     throw new InvalidOperationException("Invalid types for less_equal evaluation");
                 case Token_Type.GREATER_EQUAL:
-                    if (IsNumber(left, right)) return (double)left >= (double)right;
+                    if (IsNumber(left, right)) return (int)left >= (int)right;
                     throw new InvalidOperationException("Invalid types for greater_equal evaluation");
 
                 case Token_Type.AND:
@@ -149,23 +150,31 @@ namespace Skyrim_Interpreter
         }
         public static object ReturnList(string i1,string i2,Context context,params object[] parametros) 
         {
+            UnityEngine.Debug.Log($"tenemos ccomo primer string{i1} y como segundo {i2}");
+
             if (GameContext.IsContainsAssignment(i1))
             {
                 object obj = GameContext.Assignment[i1];
                 if (obj is Context cont)
                 {
+                    UnityEngine.Debug.Log($"Entroooooooooooooooooo");
                     Type tipo = cont.GetType();
                     if (parametros.Length == 0)
                     {
+                        UnityEngine.Debug.Log("Entro a propiedad");
                         PropertyInfo property = tipo.GetProperty(i2);
                         if (property is not null)
                         {
+                            UnityEngine.Debug.Log("es una propiedad");
                             return property.GetValue(cont);
                         }
+                        UnityEngine.Debug.Log("No es un propiedad");
                     }
+                    UnityEngine.Debug.Log("comprobemos si es un metodo");
                     MethodInfo method = tipo.GetMethod(i2);
                     if (method is not null)
                     {
+                        UnityEngine.Debug.Log("Es un metodo");
                         // Invocar el método y devolver el resultado
                         return method.Invoke(cont, parametros);
                     }
@@ -198,14 +207,21 @@ namespace Skyrim_Interpreter
         }
         public static object ReturnChangeAux(object obj, string method, object[] parameters)
         {
+            UnityEngine.Debug.Log($"entramos a retunchangeaux de tenemos el objeto {obj},el metodo {method}");
+            if (parameters.Length != 0) UnityEngine.Debug.Log($"Tenemos parametros y son en total {parameters.Length}");
+
             //si el objeto no hereda de ICard eso esta mal
             if (obj is not ICard) { throw new Exception("No estamos trabajando sobre ningun coleccion de cartas disponible"); }
+            UnityEngine.Debug.Log("El obj es un Icard");
             Type tipo = obj.GetType();
             MethodInfo metodo = tipo.GetMethod(method);
             if (metodo == null)
             {
+                UnityEngine.Debug.Log("el method es un metodo de Icard");
+
                 throw new InvalidOperationException($"El método '{method}' no existe en la clase {tipo.Name}.");
             }
+            UnityEngine.Debug.Log("vamos a invocar el metodo");
             return metodo.Invoke(obj, parameters);    
         }
         public static Card FindCard(Targets targets,CardASTNode card)

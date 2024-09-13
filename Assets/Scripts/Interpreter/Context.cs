@@ -18,34 +18,26 @@ namespace Skyrim_Interpreter
         public List<Card> Hand2 { get; set; }
         public List<Card> Deck1 { get; set; }
         public List<Card> Deck2 { get; set; }
-        public List<Card> A1 { get; set; }
-        public List<Card> A2 { get; set; }
-        public List<Card> D1 { get; set; }
-        public List<Card> D2 { get; set; }
-        public List<Card> G1 { get; set; }
-        public List<Card> G2 { get; set; }
         public List<Card> F1 { get; set; }
         public List<Card> F2 { get; set; }
         public List<Card> Graveyard1 { get; set; }
         public List<Card> Graveyard2 { get; set; }
-        public static Dictionary<string, object> Asignments;
+        public static Dictionary<string, List<Card>> Asignments;
         public static Context Current
-    {
+        {
         get { return _current; }
         set { _current = value; }
-    }
+        }
        
-        public Context(bool id, List<Card> board,List<Card> H1,List<Card>H2,List<Card> A1,List<Card>A2,List<Card>D1,List<Card>D2,List<Card>G1,List<Card>G2,List<Card> f1,List<Card> f2,List<Card>Grave1,List<Card>Grave2)
+        public Context(bool id, List<Card> board,List<Card> H1,List<Card>H2,List<Card> deck1,List<Card> deck2,List<Card> f1,List<Card> f2,List<Card>Grave1,List<Card>Grave2)
         {
             this.TriggerPlayer = id;
             this.Board = board;
+            F1= f1; F2= f2; 
+            Deck1 = deck1;  Deck2 = deck2;
             this.Hand1 = H1; this.Hand2 = H2;
-            this.A1= A1; this.A2 = A2;
-            this.D1= D1; this.D2 = D2;
-            this.F1= f1; this.F2 = f2;  
-            this.G1= G1; this.G2 = G2;
             this.Graveyard1 = Grave1; this.Graveyard2 = Grave2;
-            Asignments = new Dictionary<string, object>
+            Asignments = new Dictionary<string, List<Card>>
             {
                 { "board", Board },
                 {"hand1",Hand1 },
@@ -55,13 +47,7 @@ namespace Skyrim_Interpreter
                 { "field1",F1},
                 {"field2",F2 },
                 {"graveyard1",Graveyard1 },
-                {"graveyard2",Graveyard2},
-                {"A1",A1 },
-                {"A2",A2 },
-                {"D1",D1 },
-                {"D2",D2 },
-                {"G1",G1 },
-                {"G2",G2 }
+                {"graveyard2",Graveyard2}
             };
         }   
         public Hand HandOfPlayer(bool id) 
@@ -189,6 +175,11 @@ namespace Skyrim_Interpreter
             cards = cards.OrderBy(_ => rng.Next()).ToList();
         }
         public void Remove(Card  card) => cards.Remove(card);
+
+        public void Add(Card card) 
+        {
+            cards.Add(card);
+        }
     }
     public class Hand : CardsComponent { }
 

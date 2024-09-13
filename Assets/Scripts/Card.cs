@@ -66,7 +66,9 @@ public class Card : ScriptableObject
         }
         else if (EffectType == CardEffects.Created)
         {
+            Debug.Log("Entro a realizar el effecto");
             GameManager game = GameManager.Instancia;
+            if (game is null) Debug.Log("Es   nuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuulllllllllllllllllllllllllllllll");
             game.EffectsForCards(this);
         }
     }

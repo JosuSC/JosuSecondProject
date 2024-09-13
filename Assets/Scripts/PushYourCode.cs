@@ -43,14 +43,14 @@ public class PushYourCode : MonoBehaviour
         Parser par = new Parser(mylist);
         par.Parse();
         //vamos a crear los metodos para las cartas
-        List<Effect> effects = new List<Effect>();  
-        foreach (var item in GameContext.EffectAssignmet) 
-        {
-            effects.Add(item.Value);
-        }
-        string path = "D:/MySecondProject/SkyrimCard/Assets/Scripts/Interpreter/EffectGenerator.cs";
-        CodeGenerator code = new CodeGenerator(effects);
-        code.Generate(path);
+        //List<Effect> effects = new List<Effect>();  
+        //foreach (var item in GameContext.EffectAssignmet) 
+        //{
+        //    effects.Add(item.Value);
+        //}
+        //string path = "D:/MySecondProject/SkyrimCard/Assets/Scripts/Interpreter/EffectGenerator.cs";
+        //CodeGenerator code = new CodeGenerator(effects);
+        //code.Generate(path);
     }
 
 }

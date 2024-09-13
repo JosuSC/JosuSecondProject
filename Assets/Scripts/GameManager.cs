@@ -45,11 +45,11 @@ public class GameManager : MonoBehaviour
         // agregar cartas a los deck de los jugadores
         if (GameContext.Cards.Count != 0) 
         {
-            foreach (var item in GameContext.Cards) 
+            foreach (var item in GameContext.Cards)
             {
                 Card addcard = item.Value;
-                if (addcard.faction == "Alduin") CardsPlayer1.Add(addcard);
-                else if (addcard.faction == "Dovakin") CardsPlayer2.Add(addcard);
+                if (addcard.faction == "Alduin") { addcard.Owner = true; CardsPlayer2.Add(addcard); }
+                else if (addcard.faction == "Dovakin") { addcard.Owner = false; CardsPlayer1.Add(addcard); }
                 else { throw new Exception($"La carta {item.Key} no pertene a ninguna faccion del juego"); }
             }
         }
@@ -82,6 +82,12 @@ public class GameManager : MonoBehaviour
     {
         //actualizamos el contexts
         List<Card> A1list = PasarHijos(A1);
+        foreach (Card item in A1list) 
+        {
+            Debug.Log(item.name);
+        }
+        List<Card> Hand1 = this.CardsPlayer1;
+        List<Card> Hand2 = this.CardsPlayer2;   
         List<Card> A2list = PasarHijos(A2);
         List<Card> D1list = PasarHijos(D1);
         List<Card> D2list = PasarHijos(D2);
@@ -132,7 +138,7 @@ public class GameManager : MonoBehaviour
         {
             Boardlist.Add(item);
         }
-        Context newcontext = new Context(CurrentPlayer,Boardlist,this.CardsPlayer1,this.CardsPlayer2, A1list, A2list, D1list, D2list, G1list, G2list, Field1list, Field2list, Graveyard1list, Graveyard2list);
+        Context newcontext = new Context(CurrentPlayer,Boardlist,Hand1,Hand2,Deck1list,Deck2list ,Field1list, Field2list, Graveyard1list, Graveyard2list);
         GameContext.MiContext("context",newcontext);
         OnPlay.Play(card,newcontext);
     }
