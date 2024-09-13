@@ -84,6 +84,7 @@ namespace Skyrim_Interpreter
         }
         public override object Evaluar() 
         {
+            UnityEngine.Debug.Log("Comenzamos a enavluar un identificador ");
             UnityEngine.Debug.Log($"evaluamos un identificador de {value}");
             if (GameContext.Assignment.ContainsKey(value))
             {
@@ -289,10 +290,24 @@ namespace Skyrim_Interpreter
         }
         public override object Evaluar(Context context, Targets targets)
         {
-            UnityEngine.Debug.Log("Evaluar un ");
-            if (left is IdentifierASTNode ident && GameContext.IsContainsAssignment(ident.value)) 
+            UnityEngine.Debug.Log("Evaluar un assignacion ");
+            if (left is IdentifierASTNode ident && GameContext.IsContainsAssignment(ident.value))
             {
-                GameContext.InputAssignmentwithValue(ident,this.right,this.value,context,targets);
+                GameContext.InputAssignmentwithValue(ident, this.right, this.value, context, targets);
+            }
+            else if (left is AccessASTNode acc ) 
+            {
+                if(acc.left is IdentifierASTNode i && i.value == "target") 
+                {
+                    Card c = (Card)GameContext.Assignment["target"];
+                    UnityEngine.Debug.Log($"El operador eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeesssssssssss {value}");
+                    if (this.value != "-=" && this.value != "+=") throw new Exception("Esta mal el operador");
+                    var h = right.Evaluar(context,targets);
+                    if (h is not int) { throw new Exception("Debe ser int"); }
+                    int y = (int)h;
+                    if (acc.right is not IdentifierASTNode l || l.value != "power") throw new Exception("No estas accediendo a power");
+                    Ayudante.ActualizarPowerOfCard(c,  this.value, y);
+                }
             }
             else
             {
@@ -648,7 +663,10 @@ namespace Skyrim_Interpreter
             foreach (Card item in targets.targets)
             {
               GameContext.ActualizarValor("target",item);
-              block.Evaluar(context, targets);  
+                targets.targets.Remove(item);
+                UnityEngine.Debug.Log("Seguimos evaluando el cuerpo del for");
+              block.Evaluar(context, targets);
+                targets.targets.Add((Card)GameContext.Assignment["target"]);  
             }
             UnityEngine.Debug.Log("Se termino de evaluar el for ");
             return true;

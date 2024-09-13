@@ -38,6 +38,7 @@ namespace Skyrim_Interpreter
                     if (!args.Contains(myselcetor.Source)) throw new Exception("El source no existe en nuestro contexto");
                     List<Card> source = Context.Asignments[myselcetor.Source];
                     if (source == null) throw new Exception("El source no existe en nuestro contexto");
+                    UnityEngine.Debug.Log("Vamos a buscar el source");
                     Targets objective = DrawCards(source,lambda,context);
                     //ya tenemos el objetivo del effecto
                     myeffect.Targets = objective;
@@ -53,6 +54,8 @@ namespace Skyrim_Interpreter
         }
         private static Targets DrawCards(List<Card> source ,LambdaASTNode lambda,Context context) 
         {
+            UnityEngine.Debug.Log("Comenzamos");
+            UnityEngine.Debug.Log($"El count del source es de {source.Count}");
             Targets output= new Targets();
             object value = null;
             AccessASTNode a = null;
@@ -68,6 +71,7 @@ namespace Skyrim_Interpreter
                 a = acces;
                 t = comparation.type;
                 r = comparation.right;
+                UnityEngine.Debug.Log("Encontro en el hijo derecho del lambda una comparacion");
             }
             else if (rightchild is EqualASTNode equal)
             {
@@ -75,6 +79,7 @@ namespace Skyrim_Interpreter
                 a = acces;
                 t = equal.type;
                 r = equal.Right;
+                UnityEngine.Debug.Log("Encontro en el hijo derecho del lambda un ==");
             }
             else if (rightchild is NotEqualASTNode notequal)
             {
@@ -82,16 +87,22 @@ namespace Skyrim_Interpreter
                 a = acces;
                 t = notequal.type;
                 r = notequal.Right;
+                UnityEngine.Debug.Log("Encontro en el hijo derecho del lambda un !=");
             }
             else 
             {
                 throw new InvalidOperationException("El hijo derecho del operador lambda esta mal");
             }
-            foreach (var item in source) 
+            foreach (Card item in source) 
             {
+                UnityEngine.Debug.Log($"vamos a comprobar si la carta{ item} cumple con los requisitos");    
                 value = IsAccess(a, item);
+                UnityEngine.Debug.Log($"El valor buscado de la carta es {value}");
+                object v = r.Evaluar();
+                UnityEngine.Debug.Log($"El valor de r es de {v}");
                 if (Ayudante.EvaluateBinary(value, t, r.Evaluar()) is true) 
                 {
+                    UnityEngine.Debug.Log("Encontramos un valor");
                     output.Add(item);
                 }
             }
@@ -108,16 +119,10 @@ namespace Skyrim_Interpreter
             }
              return false;
         }
-
-        private static bool IsAnyOfTheCard(string any) 
-        {
-            List<string> things =new List<string> {"Name","Faction","Power","Type","Range"};
-            if(things.Contains(any)) return true;   
-            return false;
-        }
         private static bool IsBooleanOperation(ASTnode node) => node is EqualASTNode || node is NotEqualASTNode || node is ComparationASTNode;
         private static object IsAccess(AccessASTNode node, Card card)
         {
+            UnityEngine.Debug.Log("Entramos a IsAccess");
             if ( node.left is IdentifierASTNode && node.right is IdentifierASTNode i)
             {
                 UnityEngine.Debug.Log($"Quieres acceder al atributo de {i.value}");

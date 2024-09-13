@@ -86,8 +86,8 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log(item.name);
         }
-        List<Card> Hand1 = this.CardsPlayer1;
-        List<Card> Hand2 = this.CardsPlayer2;   
+        List<Card> Hand1 = PasarHijos(this.Hand1);
+        List<Card> Hand2 = PasarHijos(this.Hand2);   
         List<Card> A2list = PasarHijos(A2);
         List<Card> D1list = PasarHijos(D1);
         List<Card> D2list = PasarHijos(D2);

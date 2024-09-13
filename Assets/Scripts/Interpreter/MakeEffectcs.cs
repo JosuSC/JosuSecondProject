@@ -12,6 +12,7 @@ namespace Skyrim_Interpreter
         {
             UnityEngine.Debug.Log($"Se mando a hacer el effecto {effect.Name}");
             effect.Action.Evaluar(context,effect.Targets);
+            UnityEngine.Debug.Log("Se ejecuto el efectooooooooooooooooooooooooooo");
         }
 
     }

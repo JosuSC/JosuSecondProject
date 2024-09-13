@@ -16,7 +16,6 @@ namespace Skyrim_Interpreter
     {
         private List<Token> tokens;
         private int currentPosition;
-        private List<string> Errors;
         private ASTnodeTree MyTree;
         static Token comprobar;
 
@@ -24,7 +23,6 @@ namespace Skyrim_Interpreter
         {
             this.tokens = tokens;
             this.currentPosition = 0;
-            this.Errors = new List<string>();
             comprobar = null;
             MyTree = new ASTnodeTree(); 
         }
@@ -50,11 +48,7 @@ namespace Skyrim_Interpreter
             return Peek().Value == value;   
         }
 
-        public void Avisar(string esperado,string actual) 
-        {
-            Console.WriteLine($"Se esperaba un{esperado} y en su lugar tenemos {actual}");
-        }
-
+    
         //Verifica si ya se llego al final de la lista de tokens
         private bool IsAtEnd() 
         {

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Security.AccessControl;
 using System.Xml.Linq;
 using System.Reflection;
+using UnityEngine;
 
 namespace Skyrim_Interpreter
 {
@@ -18,8 +19,9 @@ namespace Skyrim_Interpreter
         {
             foreach (var obejects in myobjects)
             {
-                if (obejects is not double) return false;
+                if (obejects is not int) return false;
             }
+            UnityEngine.Debug.Log("sonnnnnn  numerrrrrrrrrooooooooooooooosssssss  repiiiinnnnnggaaaaaaaa");
             return true;
         }
 
@@ -55,19 +57,19 @@ namespace Skyrim_Interpreter
             switch (type)
             {
                 case Token_Type.PLUS:
-                    if (IsNumber(left, right)) return (double)left + (double)right;
+                    if (IsNumber(left, right)) return (int)left + (int)right;
                     throw new InvalidOperationException("Invalid types for plus evaluation");
                 case Token_Type.MINUS:
-                    if (IsNumber(left, right)) return (double)left - (double)right;
+                    if (IsNumber(left, right)) return (int)left - (int)right;
                     throw new InvalidOperationException("Invalid types for minus evaluation");
                 case Token_Type.MULTIPLY:
-                    if (IsNumber(left, right)) return (double)left * (double)right;
+                    if (IsNumber(left, right)) return (int)left * (int)right;
                     throw new InvalidOperationException("Invalid types for multlipy evaluation");
                 case Token_Type.DIVIDE:
-                    if (IsNumber(left, right)) return (double)left / (double)right;
+                    if (IsNumber(left, right)) return (int)left / (int)right;
                     throw new InvalidOperationException("Invalid types for divide evaluation");
                 case Token_Type.MODULUS:
-                    if (IsNumber(left, right)) return (double)left % (double)right;
+                    if (IsNumber(left, right)) return (int)left % (int)right;
                     throw new InvalidOperationException("Invalid types for modulus evaluation");
                 case Token_Type.POWER:
                     if (IsNumber(left, right))
@@ -244,5 +246,25 @@ namespace Skyrim_Interpreter
                 else throw new InvalidOperationException("Estan mal definidos los parametros ,para definirlos es necesario utilizar dos puntos");
             }
         }
+
+        public static void ActualizarPowerOfCard(Card card,string o,int v) 
+        {
+            int currentPower = card.power;
+            UnityEngine.Debug.Log($"El currentpower es {currentPower}");
+            switch (o)
+            {
+                case "-=":
+                    currentPower = currentPower - v;
+                    break;
+                case "+=":
+                    currentPower = currentPower - v;
+                    break;
+                default:
+                    throw new ArgumentException("Operación inválida. Debe ser '-=' o '+='");
+            }
+            card.power = currentPower;
+            GameContext.Assignment["target"] = card;    
+        }
+
     }
 } 
