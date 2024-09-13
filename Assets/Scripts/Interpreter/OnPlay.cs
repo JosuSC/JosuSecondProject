@@ -31,7 +31,6 @@ namespace Skyrim_Interpreter
                     SelectorCardNode myselcetor = ecn.Selector;
                     UnityEngine.Debug.Log($"El source que vamos a buscar es {myselcetor.Source}");
                     if (myselcetor.Source == null) throw new InvalidOperationException("Necesitamos que en el selector ");
-                    UnityEngine.Debug.Log("Board");
                     UnityEngine.Debug.Log(myselcetor.Source);
                     if (myselcetor.Predicate is not LambdaASTNode lambda) throw new InvalidOperationException("Estamos presentando problemas con el predicate del selector");
                     List<string> args = new List<string>() { "hand1", "hand2", "deck1", "deck2", "field1", "field2", "graveyard1", "graveyard2", "board" };

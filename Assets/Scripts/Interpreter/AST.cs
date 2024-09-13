@@ -333,7 +333,7 @@ namespace Skyrim_Interpreter
             object soo = null;
                 if (!GameContext.IsContainsAssignment(sn.value)) { throw new Exception("No existe en nuestro contexto esa variable"); }
                  soo = GameContext.Assignment[sn.value];
-            return Ayudante.EvaluateUnary(this.value, soo);
+            return Ayudante.EvaluateUnary(this.value, soo,sn.value);
         }
         public override object Evaluar() { return null; }
     }
@@ -662,11 +662,9 @@ namespace Skyrim_Interpreter
             //Targets colec = (Targets)GameContext.Assignment[colection.value];
             foreach (Card item in targets.targets)
             {
-              GameContext.ActualizarValor("target",item);
-                targets.targets.Remove(item);
+              GameContext.ActualizarValor("target",item);      
                 UnityEngine.Debug.Log("Seguimos evaluando el cuerpo del for");
               block.Evaluar(context, targets);
-                targets.targets.Add((Card)GameContext.Assignment["target"]);  
             }
             UnityEngine.Debug.Log("Se termino de evaluar el for ");
             return true;

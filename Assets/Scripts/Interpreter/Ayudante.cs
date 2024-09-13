@@ -115,7 +115,7 @@ namespace Skyrim_Interpreter
                 default: return null;
             }
         }
-        public static object EvaluateUnary(string value, object son)
+        public static object EvaluateUnary(string value, object son,string pos)
         {
             switch (value)
             {
@@ -123,10 +123,10 @@ namespace Skyrim_Interpreter
                     if (IsBoolean(son)) { GameContext.Assignment[son.ToString()] = !(bool)son; return !(bool)son; }
                     break;
                 case "++":
-                    if (IsNumber(son)) { GameContext.Assignment[son.ToString()] = (int)son + 1;  return (int)son + 1; }
+                    if (IsNumber(son)) { GameContext.Assignment[pos] = (int)son + 1;  return (int)son + 1; }
                     break;
                 case "--":
-                    if (IsNumber(son)) { GameContext.Assignment[son.ToString()] = (int)son - 1; return (int)son - 1; }
+                    if (IsNumber(son)) { GameContext.Assignment[pos] = (int)son - 1; return (int)son - 1; }
                     break;
                 default: return null;
             }
