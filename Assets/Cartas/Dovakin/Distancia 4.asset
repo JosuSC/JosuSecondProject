@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Distancia
   imagen: {fileID: 7863707141480691414, guid: 9527cbe7a60f92e4cba4e83f63faf6cc, type: 3}
-  power: 14
+  power: 20
   type: Oro
   IsCreated: 0
   EffectType: 1

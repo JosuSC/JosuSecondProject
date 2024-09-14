@@ -26,22 +26,32 @@ namespace Skyrim_Interpreter
                     }
                     //obtenemos el efecto que vamos a realizar
                     myeffect = GameContext.EffectAssignmet[ecn.Name];
+                    Targets objective = null;
                     UnityEngine.Debug.Log($"Encontro el effecto y es {myeffect.Name}");
-                    if (ecn.Selector == null) { throw new InvalidOperationException("No podemos enviarles los targets al effecto si no tenemos un selector definido"); }
-                    SelectorCardNode myselcetor = ecn.Selector;
-                    UnityEngine.Debug.Log($"El source que vamos a buscar es {myselcetor.Source}");
-                    if (myselcetor.Source == null) throw new InvalidOperationException("Necesitamos que en el selector ");
-                    UnityEngine.Debug.Log(myselcetor.Source);
-                    if (myselcetor.Predicate is not LambdaASTNode lambda) throw new InvalidOperationException("Estamos presentando problemas con el predicate del selector");
-                    List<string> args = new List<string>() { "hand1", "hand2", "deck1", "deck2", "field1", "field2", "graveyard1", "graveyard2", "board" };
-                    if (!args.Contains(myselcetor.Source)) throw new Exception("El source no existe en nuestro contexto");
-                    List<Card> source = Context.Asignments[myselcetor.Source];
-                    if (source == null) throw new Exception("El source no existe en nuestro contexto");
-                    UnityEngine.Debug.Log("Vamos a buscar el source");
-                    Targets objective = DrawCards(source,lambda,context);
-                    //ya tenemos el objetivo del effecto
+                    if (ecn.Selector != null)
+                    {
+                        SelectorCardNode myselcetor = ecn.Selector;
+                        UnityEngine.Debug.Log($"El source que vamos a buscar es {myselcetor.Source}");
+                        if (myselcetor.Source == null) throw new InvalidOperationException("Necesitamos que en el selector ");
+                        UnityEngine.Debug.Log(myselcetor.Source);
+                        if (myselcetor.Predicate is not LambdaASTNode lambda) throw new InvalidOperationException("Estamos presentando problemas con el predicate del selector");
+                        List<string> args = new List<string>() { "hand1", "hand2", "deck1", "deck2", "field1", "field2", "graveyard1", "graveyard2", "board" };
+                        if (!args.Contains(myselcetor.Source)) throw new Exception("El source no existe en nuestro contexto");
+                        List<Card> source = Context.Asignments[myselcetor.Source];
+                        if (source == null) throw new Exception("El source no existe en nuestro contexto");
+                        UnityEngine.Debug.Log("Vamos a buscar el source");
+                        objective = DrawCards(source, lambda, context);
+                        //ya tenemos el objetivo del effecto
+                    }
+                    if (myeffect.Name == "ReturnToDeck") 
+                    { 
+                        List<Card> list = Context.Asignments["board"];
+                        Targets t = new Targets();
+                        t .targets = list;
+                        objective = t;
+                    }
                     myeffect.Targets = objective;
-                    UnityEngine.Debug.Log($"el count del source es de {myeffect.Targets.targets.Count}");
+                    if(objective != null) UnityEngine.Debug.Log($"el count del source es de {myeffect.Targets.targets.Count}");
                     //llamamos al effecto
                     MakeEffectcs.DoIt(myeffect,context);
                 }

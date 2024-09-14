@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Asedio
   imagen: {fileID: 5328477770911536875, guid: c75fe80016dbe3c4fb7ccd0272476d62, type: 3}
-  power: 12
+  power: 18
   type: Oro
   IsCreated: 0
   EffectType: 10
