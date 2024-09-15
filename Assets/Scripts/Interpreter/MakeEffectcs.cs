@@ -16,11 +16,15 @@ namespace Skyrim_Interpreter
             List<Card> c = Context.Asignments["board"];
             UnityEngine.Debug.Log($"La cantidad de cartas que hay actualmente en el board son de {c.Count}");
             UnityEngine.Debug.Log("Se ejecuto el efectooooooooooooooooooooooooooo");
+            GameManager game = GameManager.Instancia;
             if (effect.Name == "Draw") 
             {
-                GameManager game = GameManager.Instancia;
                 game.ActualizarVisualizacionCartas(Context.Asignments["hand1"],game.Hand1);
-                game.ActualizarVisualizacionCartas(Context.Asignments["hand2"], game.Hand1);
+                game.ActualizarVisualizacionCartas(Context.Asignments["hand2"], game.Hand2);
+            }
+            if (effect.Name == "ReturnToDeck")
+            {
+                game.ActualizarCampo(Context.Asignments["board"]);
             }
         }
 

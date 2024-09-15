@@ -301,6 +301,33 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void ActualizarCampo(List<Card> boardCards)
+    {
+        // Lista de objetos a iterar
+        GameObject[] campos = { A1, A2, D1, D2, G1, G2, Clima11, Clima12, Clima13, Clima21, Clima22, Clima23 };
+
+        // Lista para almacenar todas las cartas encontradas
+        List<Card> todasLasCartas = new List<Card>();
+
+        foreach (GameObject campo in campos)
+        {
+            // Obtener las cartas en el campo actual
+            List<Card> cartasEnCampo = PasarHijos(campo);
+
+            // Agregar las cartas encontradas a la lista total
+            todasLasCartas.AddRange(cartasEnCampo);
+        }
+
+        // Iterar por todas las cartas encontradas y destruir las que no están en la lista del board
+        foreach (Card carta in todasLasCartas)
+        {
+            if (!boardCards.Contains(carta))
+            {
+                GameObject cartaObjeto = carta.GetComponent<VisualCard>().gameObject;
+                Destroy(cartaObjeto);
+            }
+        }
+    }
 
 
 }
