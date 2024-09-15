@@ -46,8 +46,13 @@ namespace Skyrim_Interpreter
                     if (myeffect.Name == "ReturnToDeck") 
                     { 
                         List<Card> list = Context.Asignments["board"];
+                        List<Card> newlist = new List<Card>();
+                        for (int i = 0; i < list.Count; i++)
+                        {
+                            newlist.Add(list[i]);
+                        }
                         Targets t = new Targets();
-                        t .targets = list;
+                        t .targets = newlist;
                         objective = t;
                     }
                     myeffect.Targets = objective;

@@ -280,5 +280,27 @@ public class GameManager : MonoBehaviour
         Instancia.Clima22= Clima22; 
         Instancia.Clima23= Clima23;
     }
-    
+
+    // para que se actualice el visual
+    public void ActualizarVisualizacionCartas(List<Card> nuevasCartas, GameObject mano)
+    {
+        // Elimina todas las cartas actuales en la mano
+        foreach (Transform child in mano.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        // Instancia y agrega las nuevas cartas a la mano
+        foreach (Card carta in nuevasCartas)
+        {
+            GameObject cartaInstancia = Instantiate(Prefab, mano.transform);
+            VisualCard scriptable = cartaInstancia.GetComponent<VisualCard>();
+            scriptable.card = carta;
+            scriptable.InicializaCarta();
+            cartaInstancia.SetActive(true);
+            cartaInstancia.GetComponent<DragDrop>().enabled = true;
+        }
+    }
+
+
+
 }

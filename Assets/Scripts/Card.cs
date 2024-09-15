@@ -82,4 +82,5 @@ public class Card : ScriptableObject
         Megacarta = Gigant.GetComponent<SpriteRenderer>();
         Gigant.transform.localScale = Vector3.zero;
      }
+    public bool owner { get { return Owner; } }
 }

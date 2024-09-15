@@ -212,8 +212,9 @@ namespace Skyrim_Interpreter
             UnityEngine.Debug.Log($"entramos a retunchangeaux de tenemos el objeto {obj},el metodo {method}");
             if (parameters.Length != 0) UnityEngine.Debug.Log($"Tenemos parametros y son en total {parameters.Length}");
 
+            Debug.Log($"El tipo de object que tengo ahora mismo en un {obj.GetType()}");
             //si el objeto no hereda de ICard eso esta mal
-            if (obj is not ICard) { throw new Exception("No estamos trabajando sobre ningun coleccion de cartas disponible"); }
+            if (obj is not ICard && obj is not List<Card>) { throw new Exception("No estamos trabajando sobre ningun coleccion de cartas disponible"); }
             UnityEngine.Debug.Log("El obj es un Icard");
             Type tipo = obj.GetType();
             MethodInfo metodo = tipo.GetMethod(method);
@@ -223,6 +224,12 @@ namespace Skyrim_Interpreter
 
                 throw new InvalidOperationException($"El método '{method}' no existe en la clase {tipo.Name}.");
             }
+            List<Card> list = Context.Asignments["board"];
+            List<Card> d1 = Context.Asignments["deck1"];
+            List<Card> d2 = Context.Asignments["deck2"];
+            UnityEngine.Debug.Log($"el count de mi board actual es de {list.Count}   ***********************************************************************************");
+            UnityEngine.Debug.Log($"el count de mi deck1  actual es de {d1.Count}   ***********************************************************************************");
+            UnityEngine.Debug.Log($"el count de mi deck2 actual es de {d2.Count}   ***********************************************************************************");
             UnityEngine.Debug.Log("vamos a invocar el metodo");
             return metodo.Invoke(obj, parameters);    
         }
