@@ -324,7 +324,8 @@ public class GameManager : MonoBehaviour
             if (!boardCards.Contains(carta))
             {
                 GameObject cartaObjeto = carta.GetComponent<VisualCard>().gameObject;
-                Destroy(cartaObjeto);
+                Transform card = cartaObjeto.transform;
+                card = null;
             }
         }
     }

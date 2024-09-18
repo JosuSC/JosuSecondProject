@@ -8,44 +8,44 @@ public class Lideres : MonoBehaviour, IPointerClickHandler
 {
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(eventData.pointerPress.transform.parent.tag == "Eli_Shane") 
+        if(eventData.pointerPress.transform.parent.tag == "Dovakin") 
         {
             Debug.Log("se llamo al metodo al hacer click");
-            Eli_Shane();
+            Dovakin();
         }
-        else if(eventData.pointerPress.transform.parent.tag == "Tork") Tork();
+        else if(eventData.pointerPress.transform.parent.tag == "Alduin") Alduin();
     }
-    public static void Eli_Shane()
+    public static void Dovakin()
     {
         Vector2 nuevaescala = new Vector2(1,1);
         Lideres InMoment = GameManager.Instancia.lidersqr1.transform.GetChild(0).GetComponent<Lideres>();
         InMoment.enabled = false;
-        if(GameObject.Find("ClimaF1P1").transform.childCount != 0)
+        if(GameObject.Find("Clima21").transform.childCount != 0)
         {
-            MoverObjeto(GameObject.Find("ClimaF1P1").transform,GameManager.Instancia.Cementery2.transform,nuevaescala);
+            MoverObjeto(GameObject.Find("Clima21").transform,GameManager.Instancia.Cementery2.transform,nuevaescala);
         }
-        if(GameObject.Find("ClimaF2P1").transform.childCount != 0)
+        if(GameObject.Find("Clima22").transform.childCount != 0)
         {
-            MoverObjeto(GameObject.Find("ClimaF2P1").transform,GameManager.Instancia.Cementery2.transform,nuevaescala);
+            MoverObjeto(GameObject.Find("Clima22").transform,GameManager.Instancia.Cementery2.transform,nuevaescala);
         }
-        if(GameObject.Find("ClimaF3P1").transform.childCount != 0 )
+        if(GameObject.Find("Clima23").transform.childCount != 0 )
         {
-            MoverObjeto(GameObject.Find("ClimaF3P1").transform,GameManager.Instancia.Cementery2.transform,nuevaescala);
+            MoverObjeto(GameObject.Find("Clima23").transform,GameManager.Instancia.Cementery2.transform,nuevaescala);
         }
         GameManager.Instancia.StarGame(GameManager.Instancia.CurrentPlayer);
     }
-    public static void Tork()
+    public static void Alduin()
     {
         Vector2 nuevaescala = new Vector2(1,1);
         Lideres InMoment = GameManager.Instancia.lidersqr2.transform.GetChild(0).GetComponent<Lideres>();
         InMoment.enabled = false;
-        if(GameObject.Find("Cementery2").transform.childCount >= 1 && GameManager.Instancia.Hand2.transform.childCount <= 9)
+        if(GameObject.Find("Graveyard2").transform.childCount >= 1 && GameManager.Instancia.Hand2.transform.childCount <= 9)
         {
             int n = 10 - GameManager.Instancia.Hand2.transform.childCount;
             if(n > 2) n = 2;
             for(int x = 0 ; x < n ; x++)
             {
-                MoverObjeto(GameObject.Find("Cementery2").transform.GetChild(x),GameManager.Instancia.Hand2.transform,nuevaescala);
+                MoverObjeto(GameObject.Find("Graveyard2").transform.GetChild(x),GameManager.Instancia.Hand2.transform,nuevaescala);
             }
         }
         GameManager.Instancia.StarGame(GameManager.Instancia.CurrentPlayer);

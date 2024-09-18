@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RoundsControler : MonoBehaviour
 {
@@ -55,6 +56,16 @@ public class RoundsControler : MonoBehaviour
                 Counter = 0;
             }
             Rounds += 1;
+            CleanBoard.Clean();
+            StartRounds.UpdateRounds();
+            if (CounterPoints.totalPoints_P1 == 2)
+            {
+                SceneManager.LoadScene(2);
+            }
+            else if (CounterPoints.totalRound_P2 == 2) 
+            {
+                SceneManager.LoadScene(3);  
+            }
             return;
         }
         else if(GameManager.Instancia.CurrentPlayer)
@@ -65,6 +76,9 @@ public class RoundsControler : MonoBehaviour
         {
             GameManager.Instancia.CurrentPlayer = true;
         }
+        // cargar escenas para los ganadores 
+        if (CounterPoints.totalPoints_P1 == CounterPoints.totalPoints_P2 && CounterPoints.totalRound_P2 == 2) SceneManager.LoadScene(4);
+
         GameManager.Instancia.StarGame(GameManager.Instancia.CurrentPlayer);
     }
 }
